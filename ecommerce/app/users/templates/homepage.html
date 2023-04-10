@@ -1,72 +1,97 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+
+
 {% block content %}
-    <br><br><br>
-    <div class="row">
-        <div class="col-lg-4">
-            <h3 style="text-align: center;">Indoor Plants</h3>
-            <hr>
-            <img class="thumbnail" src="{% static 'images/indoor_plants.jpg' %}" alt="">
-            <div class="box-element product">
-                <a class="btn btn-success" href="">SHOP<span class="sr-only">(current)</span></a>
+<!-- <br><br><br> -->
+<div class="hero-banner">
+    <div class="content">
+        <div class="text-content">
+            <h1>SALES</h1>
+            <p> Convallis interdum purus adipiscing dis parturient
+                posuere ac a quam a eleifend montes parturient posuere
+                curae tempor
+            </p>
+            <div class="more">
+                <div class="banner-more">Read More</div>
+                <div class="banner-more shop">Shop Now</div>
             </div>
         </div>
-        <br>
-
-        <div class="col-lg-4">
-            <h3 style="text-align: center;">Fruit Plants</h3>
-            <hr>
-            <img class="thumbnail" src="{% static 'images/fruit_plants.jpg' %}" alt="">
-            <div class="box-element product">
-                <a class="btn btn-success" href="">SHOP<span class="sr-only">(current)</span></a>
-            </div>
+        <img class="banner-img" src="{% static 'images/banner-img.png' %}" alt="" />
+    </div>
+</div>
+<!-- category -->
+<div class="shop-by-category">
+    <div class="categories">
+        <div class="category">
+            <img src="{% static 'images/category/cat-1.jpg' %}" alt="" />
         </div>
-        
-        <div class="col-lg-4">
-            <h3 style="text-align: center;">Medicinal Plants</h3>
-            <hr>
-            <img class="thumbnail" src="{% static 'images/medicinal_plants.jpg' %}" alt="">
-            <div class="box-element product">
-                <a class="btn btn-success" href="">SHOP<span class="sr-only">(current)</span></a>
-            </div>
+        <div class="category">
+            <img src="{% static 'images/category/cat-2.jpg' %}" alt="" />
         </div>
-
-        <div class="col-lg-4" style="margin-top: 3rem;">
-            <h3 style="text-align: center;">Flower Plants</h3>
-            <hr>
-            <img class="thumbnail" src="{% static 'images/flower_plants.jpg' %}" alt="">
-            <div class="box-element product">
-                <a class="btn btn-success" href="">SHOP<span class="sr-only">(current)</span></a>
-            </div>
+        <div class="category">
+            <img src="{% static 'images/category/cat-3.jpg' %}" alt="" />
         </div>
-
-        <div class="col-lg-4" style="margin-top: 3rem;">
-            <h3 style="text-align: center;">Seeds</h3>
-            <hr>
-            <img class="thumbnail" src="{% static 'images/seeds.jpg' %}" alt="">
-            <div class="box-element product">
-                <a class="btn btn-success" href="">SHOP<span class="sr-only">(current)</span></a>
-            </div>
-        </div>
-
-        <div class="col-lg-4" style="margin-top: 3rem;">
-            <h3 style="text-align: center;">Cuttings</h3>
-            <hr>
-            <img class="thumbnail" src="{% static 'images/cuttings.jpg' %}" alt="">
-            <div class="box-element product">
-                <a class="btn btn-success" href="">SHOP<span class="sr-only">(current)</span></a>
-            </div>
-        </div>
-
-        <div class="col-lg-4" style="margin-top: 3rem;">
-            <h3 style="text-align: center;">Vegetable Plants</h3>
-            <hr>
-            <img class="thumbnail" src="{% static 'images/vegetable_plants.jpg' %}" alt="">
-            <div class="box-element product">
-                <a class="btn btn-success" href="">SHOP<span class="sr-only">(current)</span></a>
-            </div>
+        <div class="category">
+            <img src="{% static 'images/category/cat-4.jpg' %}" alt="" />
         </div>
     </div>
-    <br><br><br>
+</div>
+<!-- product -->
+<div class="products-container">
+    <div class="sec-heading">POPULAR PRODUCTS</div>
+    <div class="products">
+        <div class="product-card">
+            <div class="thumbnail">
+                <img src="{% static 'images/earbuds-prod-1.webp' %}" alt="" />
+            </div>
+            <div class="prod-details">
+                 <span class="name">boAt Rockerz 450 DC edition | Wireless Headphone with 40mm Dynamic Driver</span> 
+                 <span class="price">&#8377;1200</span>  
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="thumbnail">
+                <img src="{% static 'images/earbuds-prod-1.webp' %}" alt="" />
+            </div>
+            <div class="prod-details">
+                 <span class="name">boAt Rockerz 450 DC edition | Wireless Headphone with 40mm Dynamic Driver</span> 
+                 <span class="price">&#8377;1200</span>  
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="thumbnail">
+                <img src="{% static 'images/earbuds-prod-1.webp' %}" alt="" />
+            </div>
+            <div class="prod-details">
+                 <span class="name">boAt Rockerz 450 DC edition | Wireless Headphone with 40mm Dynamic Driver</span> 
+                 <span class="price">&#8377;1200</span>  
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="thumbnail">
+                <img src="{% static 'images/earbuds-prod-1.webp' %}" alt="" />
+            </div>
+            <div class="prod-details">
+                 <span class="name">boAt Rockerz 450 DC edition | Wireless Headphone with 40mm Dynamic Driver</span> 
+                 <span class="price">&#8377;1200</span>  
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="thumbnail">
+                <img src="{% static 'images/earbuds-prod-1.webp' %}" alt="" />
+            </div>
+            <div class="prod-details">
+                 <span class="name">boAt Rockerz 450 DC edition | Wireless Headphone with 40mm Dynamic Driver</span> 
+                 <span class="price">&#8377;1200</span>  
+            </div>
+        </div>
+          
+
+    </div>
+</div>
+
+<br><br><br>
 {% endblock content %}
