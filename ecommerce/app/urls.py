@@ -1,16 +1,14 @@
 from django.urls import path
 
-from .users.views.about import About
-from .users.views.home import Home
+from .admin.views import index
+from .users.views import authenticate
+from .users.views import home
+from .users.views import about
 
 urlpatterns = [
-    path('', Home.as_view(), name='home'),
-    path('about', About.as_view(), name='about'),
-    #
-    # path('signup', Signup.as_view(), name='signup'),
-    # path('login', Login.as_view(), name='login'),
-    # path('logout', logout , name='logout'),
-    # path('cart', auth_middleware(Cart.as_view()) , name='cart'),
-    # path('check-out', CheckOut.as_view() , name='checkout'),
-    # path('orders', auth_middleware(OrderView.as_view()), name='orders'),
+    path('', home.index, name='index'),
+    path('about/', about.get, name='about'),
+    path('login/', authenticate.login, name='login'),
+    path('register/', authenticate.register, name='register'),
+    path('admin/', index.index, name='admin'),
 ]
