@@ -5,6 +5,7 @@
     <title>Web bán hàng điện tử</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+          
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
@@ -12,9 +13,9 @@
 
 <body>
 <!-- navbar  -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-black header-fix">
     <a class="navbar-brand" href="">
-        <img style="height: auto; width: 150px;" id="cart-icon" src="{% static 'images/logo.png' %}"></a>
+        <img style="height: auto; width: 150px;margin-bottom: 8px;" id="cart-icon" src="{% static 'images/logo.png' %}"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,17 +24,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link nav-header" style="color: #4b4c4d;" href="/">Home</a>
+                <a class="nav-link nav-header" style="color: white;" href="/">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link nav-header" style="color: #4b4c4d;" href="/about">About</a>
+                <a class="nav-link nav-header" style="color: white;" href="/about">About</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link nav-header" style="color: #4b4c4d;" href="/categories">Categories</a>
+                <a class="nav-link nav-header" style="color: white;" href="/categories">Categories</a>
             </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
-            <a href="/login" class="nav-link">Login</a>
+            <a href="/login" class="nav-link" style="color: white;">Login</a>
         </div>
     </div>
 </nav>
@@ -47,16 +48,97 @@
     {% endfor %}
     {% endif %}
 
-    <br>
+    <!-- <br> -->
     {% block content %}
 
     {% endblock content %}
 </div>
 
 
+<div class="newsletter-section">
+    <div class="newsletter-content">
+        <span class="small-text">Newsletter</span>
+        <span class="big-text">Sign up for latest updates and offers</span>
+        <div class="form">
+            <input type="text" placeholder="Email Address" />
+            <button class="btn">Subscribe</button>
+        </div>
+        <div class="text">Will be used in accordance with our Privacy Policy</div>
+        <!-- <div class="social-icons">
+            <div class="icon">
+            </div>
+            <div class="icon">
+            </div>
+            <div class="icon">
+            </div>
+            <div class="icon">
+            </div>
+        </div> -->
+    </div>
+</div>
 <div class="footer-basic">
-    <footer>
-        <p class="copyright">Captone Project Python 20N10 2023</p>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="col">
+                <div class="title">About</div>
+                <div class="text">
+                    Voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo eaque
+                    ipsa quae ab illo.
+                </div>
+            </div>
+            <div class="col">
+                <div class="title">Contact</div>
+                <div class="c-item">
+                    <FaLocationArrow />
+                    <div class="text">
+                        Kayaloram Rd, Punnamada, Kottankulangara, Alappuzha,
+                        Kerala, 688006
+                    </div>
+                </div>
+                <div class="c-item">
+                    <FaMobileAlt />
+                    <div class="text">
+                        Phone: 0671 272 0261
+                    </div>
+                </div>
+                <div class="c-item">
+                    <FaEnvelope />
+                    <div class="text">
+                        Email: store@gmail.com
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="title">Categories</div>
+                <span class="text">Headphones</span>
+                <span class="text">Smart Watches</span>
+                <span class="text">Bluetooth Speakers</span>
+                <span class="text">Wireless Earbuds</span>
+                <span class="text">Home Theatre</span>
+                <span class="text">Projectors</span>
+
+            </div>
+            <div class="col">
+                <div class="title">Pages</div>
+                <span class="text">Home</span>
+                <span class="text">About</span>
+                <span class="text">Privacy Policy</span>
+                <span class="text">Returns</span>
+                <span class="text">Terms & Conditions</span>
+                <span class="text">Contact Us</span>
+            </div>
+        </div>
+        <div class="bottom-bar">
+            <div class="bottom-bar-content">
+                <span class="text">
+                    TVSTORE 2023 CREATED BY TV DEV. PREMIUM E-COMMERCE
+                    SOLUTIONS.
+                </span>
+                <img src="{% static 'images/payments.png' %}"/>
+            </div>
+        </div>
     </footer>
 </div>
 
