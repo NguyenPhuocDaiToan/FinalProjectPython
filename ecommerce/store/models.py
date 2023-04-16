@@ -17,6 +17,12 @@ class Category(MPTTModel):
         unique=True,
     )
     slug = models.SlugField(verbose_name=_("Slug"), max_length=255, unique=True)
+    # image = models.ImageField(
+    #     verbose_name=_("Ảnh"),
+    #     help_text=_("Upload ảnh sản phẩm"),
+    #     upload_to="images/",
+    #     default="images/default.png",
+    # )
     parent = TreeForeignKey("self", verbose_name=_("Danh mục cha"), on_delete=models.CASCADE, null=True, blank=True, related_name="children")
     is_active = models.BooleanField(verbose_name=_("Trạng thái hoạt động"), default=True)
 
@@ -72,8 +78,8 @@ class Product(models.Model):
     The Product table containing all product items.
     """
 
-    product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
-    category = models.ForeignKey(Category, on_delete=models.RESTRICT)
+    product_type = models.ForeignKey(ProductType, verbose_name=_("loại sản phẩm"), on_delete=models.RESTRICT)
+    category = models.ForeignKey(Category, verbose_name=_("danh mục"), on_delete=models.RESTRICT)
     title = models.CharField(
         verbose_name=_("Tên sản phẩm"),
         help_text=_("Bắt buộc"),
@@ -83,25 +89,25 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255)
     regular_price = models.DecimalField(
         verbose_name=_("Giá gốc"),
-        help_text=_("Tối đa 999999.99"),
+        help_text=_("Tối đa 999.999.999đ"),
         error_messages={
             "name": {
-                "max_length": _("Giá phải nằm trong khoảng từ 0 đến 999999.99."),
+                "max_length": _("Giá phải nằm trong khoảng từ 0 đến 999.999.999đ"),
             },
         },
-        max_digits=5,
-        decimal_places=2,
+        max_digits=9,
+        decimal_places=0,
     )
     discount_price = models.DecimalField(
         verbose_name=_("Giảm giá"),
-        help_text=_("Tối đa 999999.99."),
+        help_text=_("Tối đa 999.999.999đ"),
         error_messages={
             "name": {
-                "max_length": _("Giá phải nằm trong khoảng từ 0 đến 999999.99."),
+                "max_length": _("Giá phải nằm trong khoảng từ 0 đến 999.999.999đ"),
             },
         },
-        max_digits=5,
-        decimal_places=2,
+        max_digits=9,
+        decimal_places=0,
     )
     is_active = models.BooleanField(
         verbose_name=_("Hiển thị sản phẩm"),

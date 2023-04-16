@@ -22,14 +22,14 @@ class DeliveryOptions(models.Model):
     )
     delivery_price = models.DecimalField(
         verbose_name=_("Giá"),
-        help_text=_("Tối đa 999999.99"),
+        help_text=_("Tối đa 999.999đ"),
         error_messages={
             "name": {
-                "max_length": _("Giá phải nằm trong khoảng từ 0 đến 999999.99."),
+                "max_length": _("Giá phải nằm trong khoảng từ 0 đến 999.999đ"),
             },
         },
         max_digits=8,
-        decimal_places=2,
+        decimal_places=0,
     )
     delivery_method = models.CharField(
         choices=DELIVERY_CHOICES,
@@ -37,13 +37,13 @@ class DeliveryOptions(models.Model):
         help_text=_("Bắt buộc"),
         max_length=255,
     )
-    delivery_timeframe = models.CharField(
+    delivery_time = models.CharField(
         verbose_name=_("Thời gian vận chuyển"),
         help_text=_("Bắt buộc"),
         max_length=255,
     )
 
-    order = models.IntegerField(verbose_name=_("Thứ tự ưu tiên:"), help_text=_("Required"), default=0)
+    order = models.IntegerField(verbose_name=_("Thứ tự ưu tiên:"), help_text=_("Bắt buộc"), default=0)
     is_active = models.BooleanField(verbose_name=_("Trạng thái hoạt động"), default=True)
 
     class Meta:

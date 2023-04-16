@@ -19,7 +19,7 @@
 </head>
 
 <body>
-  <header class="pb-3">
+  <header>
     <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
       <div class="container-fluid px-md-4">
         <div class="d-flex w-100 navbar-collapse">
@@ -69,14 +69,14 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="small text-muted">Hello,
+                    <div class="small text-muted">Xin chào,
                       {% if user.is_authenticated %}
                         {{ request.user.name }}
                       {% else %}
                       Login
                       {% endif %}
                     </div>
-                    <span class="fs15 fw500">Account &amp; Lists
+                    <span class="fs15 fw500">Quản lý tài khoản
                     </span>
                     </span>
                   </a>
@@ -88,11 +88,11 @@
                         {% endif %}
                         <ul class="list-group list-group-flush dropdown-account-link">
                           {% if user.is_authenticated %}
-                          <a href="{% url 'account:dashboard' %}" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">My Account</a>
-                          <a href="#" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Orders</a>
-                          <a href="{% url 'account:logout' %}" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Logout</a>
+                          <a href="{% url 'account:dashboard' %}" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Tài khoản</a>
+                          <a href="#" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Đơn hàng</a>
+                          <a href="{% url 'account:logout' %}" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Đăng xuất</a>
                           {% else %}
-                          <a href="{% url 'account:login' %}" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Login</a>
+                          <a href="{% url 'account:login' %}" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Đăng nhập</a>
                           {% endif %}
                         </ul>
                       </div>
@@ -120,7 +120,7 @@
                   d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
               </svg>
             </div>
-            <span class="fs15 fw500">Basket</span>
+            <span class="fs15 fw500">Giỏ hàng</span>
           </a>
         </div>
         <div class="d-md-none d-lg-none d-xl-none">
@@ -138,11 +138,11 @@
             </ul>
               <ul class="list-group list-group-flush dropdown-account-link">
                 {% if user.is_authenticated %}
-                <a href="{% url 'account:dashboard' %}" class="dropdown-item">My Account</a>
+                <a href="{% url 'account:dashboard' %}" class="dropdown-item">Tài khoản của bạn</a>
                 <a href="#" class="dropdown-item">Orders</a>
-                <a href="{% url 'account:logout' %}" class="dropdown-item">Logout</a>
+                <a href="{% url 'account:logout' %}" class="dropdown-item">Đăng xuất</a>
                 {% else %}
-                <a href="{% url 'account:login' %}" class="dropdown-item">Login</a>
+                <a href="{% url 'account:login' %}" class="dropdown-item">Đăng nhập</a>
                 {% endif %}
               </ul>
           </div>
@@ -155,7 +155,7 @@
     </nav>
   </header>
 
-  <main class="pt-5">
+  <main>
     <div id="content">{% block content %} {% endblock %}</div>
   </main>
 

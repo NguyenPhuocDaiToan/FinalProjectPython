@@ -28,7 +28,7 @@ class CustomAccountManager(BaseUserManager):
 
         if not email:
             raise ValueError(_('You must provide an email address'))
-
+        other_fields.setdefault('is_active', True)
         email = self.normalize_email(email)
         user = self.model(email=email, name=name,
                           **other_fields)
@@ -41,7 +41,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     name = models.CharField(max_length=150)
     mobile = models.CharField(max_length=20, blank=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
