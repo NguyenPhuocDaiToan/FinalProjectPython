@@ -2,13 +2,13 @@
 {% block title %}Register Account{% endblock %}
 {% block sub_content %}
 
-<form class="account-form" action="." method="post">
+<form class="account-form mt-5" action="." method="post">
     {% csrf_token %}
-    <h3 class="mb-2">Create an account</h3>
-    <p class="mb-4">It's free and only takes a minute.</p>
+    <h3 class="mb-2">Đăng ký tài khoản</h3>
+    <p class="mb-4">Nó miễn phí và chỉ mất một vài phút.</p>
 
     {% if form.errors %}
-    <p>Please correct the following errors:</p>
+    <p>Vui lòng chỉnh sửa lại các lỗi sau:</p>
     {% for field in form %}
     {% if field.errors %}
     <div class="alert alert-primary" role="alert">
@@ -19,25 +19,25 @@
     {% endif %}
 
     <label>{{ form.name.label }}<span class="text-muted small">
-      (Required)</span></label>
+      (Bắt buộc)</span></label>
     {{ form.name }}
     <label>{{ form.email.label}}<span class="text-muted small">
-      (Required)</span></label>
+      (Bắt buộc)</span></label>
     {{ form.email }}
     <label>{{ form.password.label}}<span class="text-muted mb-4">
     </span></label>
     <small class="form-text text-muted mb-4 small">
-        At least 8 characters and 1 digit
+        Ít nhất 8 ký tự và 1 chữ số
     </small>
     {{ form.password }}
     <label>{{ form.password2.label}}<span class="text-muted small">
-      (Required)</span></label>
+      (Bắt buộc)</span></label>
     {{ form.password2 }}
 
-    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-100" type="submit">Register</button>
+    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-100" type="submit">Đăng ký</button>
 
     <p class="text-center">
-        <a href="{% url 'account:login' %}">Already have an account?</a>
+        <a href="{% url 'account:login' %}">Bạn đã có tài khoản?</a>
     </p>
 </form>
 

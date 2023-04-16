@@ -1,7 +1,9 @@
 {% autoescape off %}
 Hi {{ user.user_name }},
 
-Your account has successfully created. Please click below link to activate your account
+Tài khoản của bạn đã được tạo thành công.
+<br>
+Vui lòng nhấp vào liên kết bên dưới để kích hoạt tài khoản của bạn
 
 http://{{ domain }}{% url 'account:activate' uidb64=uid token=token %}
 {% endautoescape %}

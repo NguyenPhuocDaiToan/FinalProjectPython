@@ -2,13 +2,13 @@
 {% block title %}Log-in{% endblock %}
 {% block sub_content %}
 
-<form class="account-form" action="{% url 'account:login' %}" method="post"
+<form class="account-form mt-5" action="{% url 'account:login' %}" method="post"
       xmlns:account="http://www.w3.org/1999/xhtml">
   {% csrf_token %}
-  <h3 class="mb-4">Sign In</h3>
+  <h3 class="mb-4">Đăng nhập</h3>
   {% if form.errors %}
   <div class="alert alert-primary" role="alert">
-    Error: Username or Password not correct!
+    Lỗi: Username hoặc Mật khẩu không đúng!
   </div>
   {% endif %}
   <label class="form-label">{{ form.username.label}}</label>
@@ -17,12 +17,13 @@
   {{ form.password}}
   <div class="d-grid gap-2">
     <input type="hidden" name="next" value="{{ next }}">
-    <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Sign in
+    <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">
+      Đăng nhập
     </button>
   </div>
   <div class="flex-column justify-content-center mx-auto pb-3">
-    <div class="text-center"><a href="{% url 'account:register' %}">Create an account</a></div>
-    <div class="text-center"><a href="{% url 'account:pwdreset' %}">Forgotten Password?</a></div>
+    <div class="text-center"><a href="{% url 'account:register' %}">Đăng ký tài khoản</a></div>
+    <div class="text-center"><a href="{% url 'account:pwdreset' %}">Quên mật khẩu?</a></div>
   </div>
 </form>
 

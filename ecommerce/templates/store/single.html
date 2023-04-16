@@ -8,11 +8,11 @@
 {% endblock %}
 {% block content %}
 
-<div class="container">
+<div class="container mt-5">
 {% if messages %}
 <div class="alert alert-warning" alert-{{ message.tags }} role="alert">
 {% for message in messages  %}
-  {{message|safe}} - <a href="{% url 'account:wishlist' %}" class="alert-link">Your Wishlist</a>.
+  {{message|safe}} - <a href="{% url 'account:wishlist' %}" class="alert-link">Danh sách yêu thích</a>.
 {% endfor %}
 </div>
 {% endif %}

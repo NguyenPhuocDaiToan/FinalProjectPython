@@ -32,7 +32,7 @@ class UserAddressForm(forms.ModelForm):
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control mb-3', 'placeholder': 'Username', 'id': 'login-username'}))
+        attrs={'class': 'form-control mb-3', 'placeholder': 'Email', 'id': 'login-username'}))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'class': 'form-control',
@@ -44,12 +44,12 @@ class UserLoginForm(AuthenticationForm):
 
 class RegistrationForm(forms.ModelForm):
     name = forms.CharField(
-        label='Enter name', min_length=4, max_length=50, help_text='Required')
-    email = forms.EmailField(max_length=100, help_text='Required', error_messages={
-        'required': 'Sorry, you will need an email'})
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+        label='Username', min_length=4, max_length=50, help_text='bắt buộc')
+    email = forms.EmailField(max_length=100, help_text='bắt buộc', error_messages={
+        'required': 'Bạn cần nhập email để đăng ký'})
+    password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput)
     password2 = forms.CharField(
-        label='Repeat password', widget=forms.PasswordInput)
+        label='Xác nhận mật khẩu', widget=forms.PasswordInput)
 
     class Meta:
         model = Customer
@@ -59,20 +59,20 @@ class RegistrationForm(forms.ModelForm):
         name = self.cleaned_data['name'].lower()
         r = Customer.objects.filter(name=name)
         if r.count():
-            raise forms.ValidationError("Username already exists")
+            raise forms.ValidationError("Username đã tồn tại")
         return name
 
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
-            raise forms.ValidationError('Passwords do not match.')
+            raise forms.ValidationError('Mật khẩu không khớp')
         return cd['password2']
 
     def clean_email(self):
         email = self.cleaned_data['email']
         if Customer.objects.filter(email=email).exists():
             raise forms.ValidationError(
-                'Please use another Email, that is already taken')
+                'Vui lòng sử dụng email khác, email đã được sử dụng')
         return email
 
     def __init__(self, *args, **kwargs):
@@ -82,9 +82,9 @@ class RegistrationForm(forms.ModelForm):
         self.fields['email'].widget.attrs.update(
             {'class': 'form-control mb-3', 'placeholder': 'E-mail', 'name': 'email', 'id': 'id_email'})
         self.fields['password'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Password'})
+            {'class': 'form-control mb-3', 'placeholder': 'Mật khẩu'})
         self.fields['password2'].widget.attrs.update(
-            {'class': 'form-control', 'placeholder': 'Repeat Password'})
+            {'class': 'form-control', 'placeholder': 'Xác nhận mật khẩu'})
 
 
 class PwdResetForm(PasswordResetForm):
@@ -96,7 +96,7 @@ class PwdResetForm(PasswordResetForm):
         u = Customer.objects.filter(email=email)
         if not u:
             raise forms.ValidationError(
-                'Unfortunatley we can not find that email address')
+                'Rất tiếc, chúng tôi không thể tìm thấy địa chỉ email đó')
         return email
 
 
