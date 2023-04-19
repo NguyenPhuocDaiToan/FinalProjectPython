@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -28,10 +28,10 @@ def add_to_wishlist(request, id):
     product = get_object_or_404(Product, id=id)
     if product.users_wishlist.filter(id=request.user.id).exists():
         product.users_wishlist.remove(request.user)
-        messages.success(request, product.title + " has been removed from your WishList")
+        messages.success(request, product.title + " đã được lại bỏ khỏi danh sách ưu thích")
     else:
         product.users_wishlist.add(request.user)
-        messages.success(request, "Added " + product.title + " to your WishList")
+        messages.success(request, "Thêm " + product.title + " vào danh sách ưa thích")
     return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
 
@@ -74,10 +74,10 @@ def account_register(request):
             user = registerForm.save(commit=False)
             user.email = registerForm.cleaned_data["email"]
             user.set_password(registerForm.cleaned_data["password"])
-            user.is_active = False
+            user.is_active = True
             user.save()
             current_site = get_current_site(request)
-            subject = "Activate your Account"
+            subject = "Kích hoạt tài khoản của bạn thành công"
             message = render_to_string(
                 "account/registration/account_activation_email.html",
                 {
