@@ -2,7 +2,7 @@
 {% block title %}Log-in{% endblock %}
 {% block sub_content %}
 
-<form class="account-form" action="{% url 'account:login' %}" method="post"
+<form class="account-form" style="margin-top: 80px;" action="{% url 'account:login' %}" method="post"
       xmlns:account="http://www.w3.org/1999/xhtml">
   {% csrf_token %}
   <h3 class="mb-4">Sign In</h3>
