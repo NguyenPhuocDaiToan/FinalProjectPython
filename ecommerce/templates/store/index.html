@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% load static %}
-{% block title %}Store - Low Prices in Books & more{% endblock %}
+{% load common_tags %}
+
 {% block stylesheet %}{% static 'css/index.css' %}{% endblock %}
+
+{% block title %}Store - Low Prices in Books & more{% endblock %}
 {% block content %}
 
 <!-- header -->
@@ -57,16 +60,17 @@
                         <div class="card border-0">
                             {% for image in product.product_image.all %}
                             {% if image.is_feature%}
-                            <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}"
+                            <img class="img-fluid" src="{{ image.image.url }}"
+                                 style="height: 150px !important; object-fit: contain"
                                  alt="{{ image.image.alt_text }}">
                             {% endif %}
                             {% endfor %}
-                            <div class="card-body px-0">
+                            <div class="card-body px-2">
                                 <p class="card-text">
-                                    <a class="text-dark text-decoration-none"
-                                       href="{{ product.get_absolute_url }}">{{ product.title|slice:":50" }}...</a>
+                                    <a class="text-dark text-decoration-none name-product"
+                                       href="{{ product.get_absolute_url }}">{{ product.title }}</a>
                                 </p>
-                                <div class="fw-bold">£{{product.regular_price}}</div>
+                                <div class="fw-bold">{{product.regular_price|currency}}</div>
                             </div>
                         </div>
                     </div>
