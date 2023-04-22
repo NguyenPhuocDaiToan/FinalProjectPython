@@ -23,12 +23,12 @@
           <div>
             <span class="h5">
               Giá chính hãng:
-              <span style="text-decoration: line-through;">{{ product.regular_price }}đ</span>
+              <span style="text-decoration: line-through;">{{ product.regular_price|currency }}</span>
             </span>
             <br>
             <span class="h5">
               Giá bán:
-              <span class="text-danger h4">{{ product.regular_price|subtract:product.discount_price }}đ</span>
+              <span class="text-danger h4">{{ product.regular_price|subtract:product.discount_price|currency }}</span>
             </span>
 
             <p class="text-muted">Giá đã bao gồm thuế</p>

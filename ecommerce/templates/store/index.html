@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Store - Low Prices in Books & more{% endblock %}
+{% load common_tags %}
+{% block title %}Shop{% endblock %}
 {% block stylesheet %}{% static 'css/index.css' %}{% endblock %}
 {% block content %}
 
@@ -52,19 +53,21 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                     {% for product in products %}
                     <div class="col">
-                        <div class="card border-0">
+                        <div class="card border-0 px-2 rounded">
                             {% for image in product.product_image.all %}
                             {% if image.is_feature%}
                             <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}"
-                                 alt="{{ image.image.alt_text }}">
+                                 alt="{{ image.image.alt_text }}" style="height: 150px !important;">
                             {% endif %}
                             {% endfor %}
                             <div class="card-body px-0">
                                 <p class="card-text">
-                                    <a class="text-dark text-decoration-none"
-                                       href="{{ product.get_absolute_url }}">{{ product.title|slice:":50" }}...</a>
+                                    <a class="text-dark text-decoration-none name-product"
+                                       href="{{ product.get_absolute_url }}">
+                                        {{ product.title }}...
+                                    </a>
                                 </p>
-                                <div class="fw-bold">£{{product.regular_price}}</div>
+                                <div class="fw-bold">{{product.regular_price|currency}}</div>
                             </div>
                         </div>
                     </div>
