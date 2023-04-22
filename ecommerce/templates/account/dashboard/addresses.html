@@ -31,19 +31,21 @@
     {% for address in addresses %}
     <div class="col">
       <div class="card pb-3">
-        <div class="card-header bg-white small text-muted fw-bolder fs-5">
+        <div class="card-header bg-white small fw-bolder fs-5 text-center">
           {% if address.default %}
             Địa chỉ mặc định
+          {% else %}
+            Địa chỉ
           {% endif %}
           &nbsp;
         </div>
         <div class="card-body small pb-1">
-          <p class="card-text m-0 fw-bold">{{address.full_name}}</p>
-          <p class="card-text m-0">{{address.address_line}}</p>
-          <p class="card-text m-0">{{address.address_line2}}</p>
-          <p class="card-text m-0">{{address.town_city}}</p>
-          <p class="card-text m-0">{{address.postcode}}</p>
-          <p class="card-text m-0">Phone number: {{address.phone}}</p>
+          <p class="card-text m-0 fw-bold fs-5">Tên khách hàng: {{address.full_name}}</p>
+          <p class="card-text m-0 my-1">Địa chỉ 1: {{address.address_line}}</p>
+          <p class="card-text m-0">Địa chỉ 2: {{address.address_line2}}</p>
+          <p class="card-text m-0 my-1">Thành phố: {{address.town_city}}</p>
+          <p class="card-text m-0">Mã code: {{address.postcode}}</p>
+          <p class="card-text m-0 mt-1">Số điện thoại: {{address.phone}}</p>
           <div class="pt-5">
             <a href="{% url 'account:edit_address' address.id %}" class="text-decoration-none">Cập nhật</a>
             |

@@ -1,14 +1,15 @@
 {% extends "../base.html" %}
 {% load static %}
-{% block title %}Delivery Options{%endblock %}
+{% load common_tags %}
+{% block title %}Thanh toán{%endblock %}
 {% block content %}
 
-<div class="container" xmlns:checkout="http://www.w3.org/1999/xhtml">
+<div class="container mt-5 pt-5" xmlns:checkout="http://www.w3.org/1999/xhtml">
   <div class="col-12">
-    <h1 class="h2">Delivery Options</h1>
+    <h1 class="h2">Tùy chọn giao hàng</h1>
   </div>
   <div class="col-12">
-    <p>Select your delivery options</p>
+    <p>Chọn tùy chọn giao hàng của bạn</p>
   </div>
   <hr />
 </div>
@@ -24,26 +25,29 @@
 {% endif %}
   <div class="row g-3">
     {% if deliveryoptions|length == 0 %}
-    <div class="col-12">There are no delivery options <a href="{% url 'store:store_home' %}">Shop</a></div>
+    <div class="col-12">Không có tùy chọn giao hàng <a href="{% url 'store:store_home' %}">Trang chủ</a></div>
     {% else %}
     <div class="col-md-4 col-lg-4 order-md-last p-0 order-3">
       <div class="d-flex bd-highlight ms-0">
-        <div class="p-2 flex-grow-1 bd-highlight">Sub Total:</div>
-        <div class="p-2 bd-highlight"><span class="fw-bold h5">£</span><span id="sub_total"
-            class="fw-bold h5">{{basket.get_subtotal_price}}</span></div>
+        <div class="p-2 flex-grow-1 bd-highlight">Tổng tiền sản phẩm:</div>
+        <div class="p-2 bd-highlight">
+          <span id="sub_total" class="fw-bold h5">{{basket.get_subtotal_price|currency}}</span>
+        </div>
       </div>
       <div class="d-flex bd-highlight">
-        <div class="p-2 flex-grow-1 bd-highlight">Delivery Cost:</div>
-        <div class="p-2 bd-highlight"><span class="fw-bold h5">£</span><span id="delivery_price"
-            class="fw-bold h5">{{basket.get_delivery_price}}</span></div>
+        <div class="p-2 flex-grow-1 bd-highlight">Phí vận chuyển:</div>
+        <div class="p-2 bd-highlight">
+          <span id="delivery_price" class="fw-bold h5">{{basket.get_delivery_price|currency}}</span>
+        </div>
       </div>
       <div class="d-flex bd-highlight">
-        <div class="p-2 flex-grow-1 bd-highlight">Total:</div>
-        <div class="p-2 bd-highlight"><span class="fw-bold h5">£</span><span id="total"
-            class="fw-bold h5">{{basket.get_total_price}}</span></div>
+        <div class="p-2 flex-grow-1 bd-highlight">Tổng tiền thanh toán:</div>
+        <div class="p-2 bd-highlight">
+          <span id="total" class="fw-bold h5 text-danger">{{basket.get_total_price|currency}}</span>
+        </div>
       </div>
-      <a role="button" href="{% url 'checkout:delivery_address' %}" class="btn btn-success fw-bold w-100"
-        type="button">Pay Securely</a>
+      <a role="button" href="{% url 'checkout:delivery_address' %}" class="btn btn-success fw-bold w-100 mt-3"
+        type="button">Thanh toán</a>
     </div>
     <div class="col-md-7 col-lg-8">
       {% for option in deliveryoptions %}
@@ -59,7 +63,7 @@
           <div class="col-md-9 ps-md-1">
             <div class="card-body p-1">
               <p class="card-text ps-2 mb-1 pt-1 fw-bold">{{option.delivery_name}}</p>
-              <p class="card-text ps-2 pb-3">Your order should be delivered within {{option.delivery_timeframe}}</p>
+              <p class="card-text ps-2 pb-3">Đơn đặt hàng của bạn sẽ được giao trong vòng {{option.delivery_time}}</p>
             </div>
           </div>
           <div class="col-md-1 ps-md-1">
@@ -86,13 +90,16 @@
         action: "post",
       },
       success: function (json) {
-        document.getElementById("total").innerHTML = json.total;
-        document.getElementById("delivery_price").innerHTML = json.delivery_price;
+        document.getElementById("total").innerHTML = format_currency(json.total);
+        document.getElementById("delivery_price").innerHTML = format_currency(json.delivery_price);
       },
       error: function (xhr, errmsg, err) {},
     });
-    
   });
+
+  function  format_currency(value) {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value)
+  }
 </script>
 
 

@@ -5,6 +5,7 @@ import ast
 import hashlib
 from django import template
 from django.utils.module_loading import import_string
+import locale
 
 try:
     # Python 3
@@ -32,3 +33,8 @@ def splitter(value, sep='.'):
 @register.filter
 def subtract(value, arg):
     return value - arg
+
+@register.filter
+def currency(value):
+    locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
+    return locale.currency(value, grouping=True).replace(',00', '')

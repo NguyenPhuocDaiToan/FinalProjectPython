@@ -1,6 +1,7 @@
 {% extends "../base.html" %}
 {% load static %}
-{% block title %}Basket Summary{%endblock %}
+{% load common_tags %}
+{% block title %}Giỏ hàng{%endblock %}
 {% block content %}
 
 
@@ -16,7 +17,7 @@
 <div class="container">
   <div class="row g-3">
     {% if basket|length == 0 %}
-    <div class="col-12">Your basket is empty <a href="{% url 'store:store_home' %}">Shop</a></div>
+    <div class="col-12">Giỏ hàng của bạn đang trống <a href="{% url 'store:store_home' %}">Trang chủ</a></div>
     {% else %}
     <div class="col-12 bg-light p-3 d-flex justify-content-between">
       <div class="d-flex d-flex-inline">
@@ -38,18 +39,26 @@
         </div>
       </div>
       <div class="text-end">
-        <div class="">Tổng tiền sản phẩm: <span class="fw-bold">£</span>
-          <div id="subtotal" class="d-inline-flex fw-bold">{{basket.get_subtotal_price}}</div>
-        </div>
-        <div id="">Phí vận chuyển <span class="small">(Giao bình thường)</span>: <span class="fw-bold">£11.50</span></div>
-        <div class="pt-2">Tổng tiền thanh toán: <span class="fw-bold h5">£</span><span id="total"
-            class="fw-bold h5">{{basket.get_total_price}}</span></div>
+        <table class="table">
+          <tr>
+            <th class="text-start">Tổng tiền sản phẩm:</th>
+            <th id="subtotal">{{basket.get_subtotal_price|currency}}</th>
+          </tr>
+          <tr>
+            <th class="text-start">Phí vận chuyển (Giao tiêu chuẩn):</th>
+            <th>30.000 đ</th>
+          </tr>
+          <tr>
+            <th class="text-start">Tổng tiền thanh toán:</th>
+            <th class="text-danger" id="total">{{basket.get_total_price|currency}}</th>
+          </tr>
+        </table>
       </div>
     </div>
     <div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
       <div class="d-grid gap-2 ">
         <a role="button" href="{% url 'checkout:deliverychoices' %}" class="btn btn-success fw-bold" type="button">Thanh toán</a>
-        <button class="btn btn-light" type="button">Save for later</button>
+        <a class="btn btn-light" type="button" href="/">Tiếp tục mua sắm</a>
       </div>
     </div>
     <div class="col-md-7 col-lg-8 p-0">
@@ -138,11 +147,10 @@
         action: "post",
       },
       success: function (json) {
-
-        total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
+        let total = Number(json.subtotal) + 30000;
         document.getElementById("basket-qty").innerHTML = json.qty;
-        document.getElementById("subtotal").innerHTML = json.subtotal;
-        document.getElementById("total").innerHTML = total;
+        document.getElementById("subtotal").innerHTML = format_currency(json.subtotal);
+        document.getElementById("total").innerHTML = format_currency(total);
       },
       error: function (xhr, errmsg, err) {},
     });

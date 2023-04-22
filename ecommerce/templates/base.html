@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>{% block title %}Store - Low Prices in Books & more{% endblock %}</title>
+  <title>{% block title %}Shop{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
@@ -102,7 +102,6 @@
                         <ul class="list-group list-group-flush dropdown-account-link">
                           {% if user.is_authenticated %}
                           <a href="{% url 'account:dashboard' %}" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Tài khoản</a>
-                          <a href="#" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Đơn hàng</a>
                           <a href="{% url 'account:logout' %}" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Đăng xuất</a>
                           {% else %}
                           <a href="{% url 'account:login' %}" class="text-reset small list-group-item p-0 pb-1 border-0 dropdown-account-link">Đăng nhập</a>
@@ -228,3 +227,9 @@
 </body>
 
 </html>
+
+<script>
+  function  format_currency(value) {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value)
+  }
+</script>
