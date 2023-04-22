@@ -1,8 +1,8 @@
-body {
-    background: #f5f5f5;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+body{
+	background-color: white;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -117,8 +117,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* category */
-.shop-by-category {
-    margin-top: 50px;
+.shop-by-category{
+    margin: 50px 0;
 }
 
 .categories {
@@ -150,11 +150,13 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-.box-element {
-    box-shadow: hsl(0, 0%, 80%) 0 0 16px;
-    background-color: #fff;
-    border-radius: 4px;
-    padding: 10px;
+
+
+.box-element{
+	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 10px;
 }
 
 /* product */

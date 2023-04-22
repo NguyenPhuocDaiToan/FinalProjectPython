@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 
 {% load static %}
-{% load common_tags %}
-
+{% block title %}Store - Low Prices in Books & more{% endblock %}
 {% block stylesheet %}{% static 'css/index.css' %}{% endblock %}
-
-{% block title %}Shop{% endblock %}
 {% block content %}
 
-
-<div class="hero-banner mt-5">
+<!-- header -->
+<div class="hero-banner">
     <div class="content">
         <div class="text-content">
             <h1>SALES</h1>
@@ -22,7 +19,7 @@
                 <div class="banner-more shop">Shop Now</div>
             </div>
         </div>
-        <img class="banner-img" src="/media/images/banner-img.png" alt=""/>
+        <img class="banner-img" src="/media/images/banner-img.png" alt="" />
     </div>
 </div>
 
@@ -31,55 +28,53 @@
     <div class="shop-by-category">
         <div class="categories">
             <a class="category" href="">
-                <img src="media/images/cat-1.jpg" alt=""/>
+                <img src="media/images/cat-1.jpg" alt="" />
             </a>
             <div class="category">
-                <img src="media/images/cat-2.jpg" alt=""/>
+                <img src="media/images/cat-2.jpg" alt="" />
             </div>
             <div class="category">
-                <img src="media/images/cat-3.jpg" alt=""/>
+                <img src="media/images/cat-3.jpg" alt="" />
             </div>
             <div class="category">
-                <img src="media/images/cat-4.jpg" alt=""/>
+                <img src="media/images/cat-4.jpg" alt="" />
             </div>
 
         </div>
     </div>
     <div class="container">
-        <div class="row px-0">
+        <div class="row">
             <div class="album py-5">
-                <h1 class="h4 pb-3">Sản phẩm phổ biến:</h1>
+                <div class="pb-3">
+                    <h1 class="h4">Sản phẩm phổ biến:</h1>
+                </div>
                 {% if not products %}
-                    <div class="col-12">Hiện tại không có sản phẩm nào đang bán.</div>
+                <div class="col-12">Hiện tại không có sản phẩm nào đang bán.</div>
                 {% else %}
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-                        {% for product in products %}
-                            <div class="col">
-                            <div class="card border-0 px-2 rounded">
-                                {% for image in product.product_image.all %}
-                                {% if image.is_feature%}
-                                <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}"
-                                     alt="{{ image.image.alt_text }}" style="height: 150px !important; object-fit: contain">
-                                {% endif %}
-                                {% endfor %}
-                                <div class="card-body px-0">
-                                    <p class="card-text">
-                                        <a class="text-dark text-decoration-none name-product"
-                                           href="{{ product.get_absolute_url }}">
-                                            {{ product.title }}...
-                                        </a>
-                                    </p>
-                                    <div class="fw-bold">{{product.regular_price|currency}}</div>
-                                </div>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+                    {% for product in products %}
+                    <div class="col">
+                        <div class="card border-0">
+                            {% for image in product.product_image.all %}
+                            {% if image.is_feature%}
+                            <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}"
+                                 alt="{{ image.image.alt_text }}">
+                            {% endif %}
+                            {% endfor %}
+                            <div class="card-body px-0">
+                                <p class="card-text">
+                                    <a class="text-dark text-decoration-none"
+                                       href="{{ product.get_absolute_url }}">{{ product.title|slice:":50" }}...</a>
+                                </p>
+                                <div class="fw-bold">£{{product.regular_price}}</div>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
+                </div>
                 {% endif %}
             </div>
         </div>
     </div>
-
-
 </div>
 {% endblock %}
