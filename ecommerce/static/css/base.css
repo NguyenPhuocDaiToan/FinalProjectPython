@@ -1,7 +1,8 @@
 /* Bootstrap Over-ride */
 @media (min-width: 1000px){
     .container{
-        max-width: 1000px;
+        max-width: 1250px;
+        padding: 0 50px;
     }
 }
 @media (max-width: 1200px){
@@ -14,10 +15,16 @@
     display: none;
 }
 .dropdown-menu{
-    top:58px;
+    top:45px;
     left:0px;
     padding:10px;
+    border-radius: 5px !important;
+
+    box-shadow: 0 0 10px 0 #b5b5b5;
 }
+.border-top{
+    border-top: solid 1px #eee;
+}   
 
 .alert-primary{
     background-color: #E4F1FF;
@@ -26,7 +33,9 @@
 
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-
+body{
+    background: #f5f5f5 !important;
+}
 html, body, p, div{
     letter-spacing: -0.02px;
     font-family: 'Roboto', sans-serif;
@@ -105,7 +114,28 @@ html, body, p, div{
 
 
 /* Footer */
-
+ .company-info{
+    font-size: 16px;
+    margin-top: 20px;
+}
+.icons.icon-payment {
+    width: 243px;
+    height: 32px;
+    background-position: -31px -58px;
+}
+.icons {
+    display: inline-block;
+    background-image: url(../../media/images/sprite.png);
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+.bf-space {
+    margin-left: 4px;
+    
+}
+.text-grey{
+    color: #6c757d !important;
+}
 .footer > div > div > ul > li{
     padding-bottom:8px;
 }
