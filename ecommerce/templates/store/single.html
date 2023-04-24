@@ -2,7 +2,7 @@
 {% load static %}
 {% load common_tags %}
 
-{% block stylesheet %}{% static 'css/store.css' %}{% endblock %}
+{% block stylesheet %}{% static '/css/store.css' %}{% endblock %}
 {% block title %}
 {% if product %}{{ product.title }}{% else %}Product{% endif %}
 {% endblock %}

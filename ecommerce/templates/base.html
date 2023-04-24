@@ -31,21 +31,17 @@
 
 <body>
 
-  <header class="fixed-top bg-white">
+  <header class="fixed-top bg-white  px-5">
 
-    <nav class="navbar navbar-expand-md navbar-light  border-bottom">
+    <nav class="navbar navbar-expand-md navbar-light  border-bottom px-3">
       <div class="container-fluid px-md-4">
         <div class="d-flex w-100 navbar-collapse">
           <a class="navbar-brand d-flex-inline" href="/">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-asterisk"
-              viewBox="0 0 16 16">
-              <path
-                d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
-            </svg>
+            <img src="/media/images/brand.svg" class="navbar-brand-img" alt="...">
           </a>
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle d-none d-md-block fw500" href="#" id="navbarDropdown1" role="button"
+              <a class="nav-link dropdown-toggle d-none d-md-block fw500 mt-2" href="#" id="navbarDropdown1" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 Danh mục
                 <i class="ps-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -57,8 +53,8 @@
               <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown1">
                 <li><a class="dropdown-item" href="{% url 'store:store_home' %}">Tất cả</a></li>
                 {% for c in categories %}
-                <li>
-                  <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
+                <li >
+                  <a class="dropdown-item border-top" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
                 </li>
                 {% endfor %}
               </ul>
@@ -173,38 +169,57 @@
    {% block content %} {% endblock %}
   </main>
 
-  <footer class="container bg-white py-5 footer">
+  <footer class="container-fluid bg-white py-5 footer px-5">
     <hr>
-    <div class="row pt-4">
-      <div class="col-12 col-md">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk"
-          viewBox="0 0 16 16">
-          <path
-            d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
-        </svg>
-        <small class="d-block mb-3 text-muted">&copy; 2017-2021</small>
+    <div class="row pt-3 mx-4 fs15">
+      <div class="col-12 col-md ">
+        <img src="/media/images/brand.svg" class="navbar-brand-img" alt="...">
+        <small class="d-block mb-4 text-muted mt-2">&copy; 2017-2023</small>
+        <h5>Công Ty TNHH Tin Học LANDKIT </h5>
+        <i class="fa fa-map-marker text-grey" aria-hidden="true"> </i>
+        <span class="text-grey bf-space">54 Lê Lợi - Thành phố Đà Nẵng</span>
+        <br/>
+        <i class="fa fa-phone text-grey " aria-hidden="true"> </i>
+        <span class="text-grey bf-space">0346.3689.300</span> 
+      </br>
+        <i class="fa fa-envelope text-grey " aria-hidden="true"></i>
+        <a class="text-grey" href="mailto:hotro@mega.com.vn">hotro@mega.com.vn</a>
+        
+        
       </div>
       <div class="col-6 col-md fs15">
-        <h5>Features</h5>
+        <h5>Thông tin chung</h5>
         <ul class="list-unstyled">
-          <li><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
-          <li><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
-          <li><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
-          <li><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-          <li><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
-          <li><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Giới thiệu LANDKIT</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Tin tuyển dụng</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Tin tức</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Tin khuyến mãi</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Liên hệ, góp ý</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Khách hàng doanh nghiệp</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Tài khoản công ty</a></li>
         </ul>
       </div>
       <div class="col-6 col-md fs15">
-        <h5>Resources</h5>
+        <h5>Hỗ trợ khách hàng</h5>
         <ul class="list-unstyled">
-          <li><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-          <li><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-          <li><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-          <li><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Tìm hiểu về mua trả góp</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Chính sách vận chuyển, giao hàng</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Chính sách, quy định chung</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Khách hàng doanh nghiệp</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Bảo mật thông tin khách hàng</a></li>
         </ul>
       </div>
       <div class="col-6 col-md fs15">
+        <h5>Tổng đài hổ trợ</h5>
+        <ul class="list-unstyled">
+          <li><a class="link-secondary text-decoration-none" href="#">Gọi mua hàng 1800.2000 (7h30 - 22h00)</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Gọi khiếu nại 1800.2003 (8h00 - 21h30)</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Gọi bảo hành 1800.2004 (8h00 - 21h00)</a></li>
+        </ul>
+        <h3 class="company-info text-grey mt-5">Phương thức thanh toán</h3>
+        <a class="icons icon-payment current" href=""></a>
+      </div>
+      <!-- <div class="col-6 col-md fs15">
         <h5>Resources</h5>
         <ul class="list-unstyled">
           <li><a class="link-secondary text-decoration-none" href="#">Business</a></li>
@@ -221,7 +236,7 @@
           <li><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
           <li><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </footer>
 </body>

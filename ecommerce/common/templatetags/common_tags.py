@@ -36,5 +36,5 @@ def subtract(value, arg):
 
 @register.filter
 def currency(value):
-    locale.setlocale(locale.LC_ALL, 'vi_VN.UTF-8')
+    locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
     return locale.currency(value, grouping=True).replace(',00', '')

@@ -45,7 +45,7 @@
 
         </div>
     </div>
-    <div class="container">
+    <div class="container px-0">
         <div class="row">
             <div class="album py-5">
                 <div class="pb-3">
@@ -54,9 +54,9 @@
                 {% if not products %}
                 <div class="col-12">Hiện tại không có sản phẩm nào đang bán.</div>
                 {% else %}
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 bg-white">
                     {% for product in products %}
-                    <div class="col">
+                    <div class="col p-item p-3">
                         <div class="card border-0">
                             {% for image in product.product_image.all %}
                             {% if image.is_feature%}

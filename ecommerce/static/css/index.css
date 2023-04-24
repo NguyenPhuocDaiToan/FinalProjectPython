@@ -150,7 +150,10 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-
+.p-item:hover {
+    box-shadow: 0 0 10px 0 #b5b5b5;
+    z-index: 2;
+  }
 
 .box-element{
 	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
