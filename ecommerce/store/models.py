@@ -136,7 +136,7 @@ class ProductSpecificationValue(models.Model):
     products individual specification or bespoke features.
     """
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_specification")
     specification = models.ForeignKey(ProductSpecification, verbose_name=_("Thông số"), on_delete=models.RESTRICT)
     value = models.CharField(
         verbose_name=_("Giá trị"),

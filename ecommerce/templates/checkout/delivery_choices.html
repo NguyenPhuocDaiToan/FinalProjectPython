@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load common_tags %}
 {% block title %}Thanh toán{%endblock %}
@@ -96,10 +96,6 @@
       error: function (xhr, errmsg, err) {},
     });
   });
-
-  function  format_currency(value) {
-    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value)
-  }
 </script>
 
 

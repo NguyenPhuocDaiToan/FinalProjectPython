@@ -81,12 +81,12 @@ def payment_complete(request):
 
     body = json.loads(request.body)
     data = body["orderID"]
+    print(data)
     user_id = request.user.id
 
     requestOrder = OrdersGetRequest(data)
-    response = PPClient.client.execute(requestOrder)
 
-    total_paid = response.result.purchase_units[0].amount.value
+    response = PPClient.client.execute(requestOrder)
 
     basket = Basket(request)
     order = Order.objects.create(
@@ -103,10 +103,11 @@ def payment_complete(request):
         billing_status=True,
     )
     order_id = order.pk
-
+    print(order)
     for item in basket:
+        print(item)
         OrderItem.objects.create(order_id=order_id, product=item["product"], price=item["price"], quantity=item["qty"])
-
+    print('Thanh toán rùi nè');
     return JsonResponse("Payment completed!", safe=False)
 
 

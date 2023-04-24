@@ -59,11 +59,11 @@
                     <div class="col">
                         <div class="card border-0">
                             {% for image in product.product_image.all %}
-                            {% if image.is_feature%}
-                            <img class="img-fluid" src="{{ image.image.url }}"
-                                 style="height: 150px !important; object-fit: contain"
-                                 alt="{{ image.image.alt_text }}">
-                            {% endif %}
+                                {% if image.is_feature%}
+                                <img class="img-fluid" src="{{ image.image.url }}"
+                                     style="height: 150px !important; object-fit: contain"
+                                     alt="{{ image.image.alt_text }}">
+                                {% endif %}
                             {% endfor %}
                             <div class="card-body px-2">
                                 <p class="card-text">
