@@ -56,7 +56,7 @@
                 {% else %}
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 bg-white">
                     {% for product in products %}
-                    <div class="col p-item p-3">
+                    <div class="col p-item p-3 mt-0">
                         <div class="card border-0">
                             {% for image in product.product_image.all %}
                                 {% if image.is_feature%}

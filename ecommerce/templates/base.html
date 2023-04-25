@@ -30,7 +30,8 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% block stylesheet %}{% endblock %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
 </head>
 
@@ -62,7 +63,8 @@
                             <li><a class="dropdown-item" href="{% url 'store:store_home' %}">Tất cả</a></li>
                             {% for c in categories %}
                             <li>
-                                <a class="dropdown-item border-top" href="{{ c.get_absolute_url }}">{{ c.name|title}}</a>
+                                <a class="dropdown-item border-top" href="{{ c.get_absolute_url }}">{{
+                                    c.name|title}}</a>
                             </li>
                             {% endfor %}
                         </ul>
@@ -103,7 +105,7 @@
                                     <div class="card border-0">
                                         <div class="card-body">
                                             {% if not user.is_authenticated %}
-                                            <h6 class="card-title">My Account</h6>
+                                            <h6 class="card-title">Tài khoản của bạn</h6>
                                             {% endif %}
                                             <ul class="list-group list-group-flush dropdown-account-link">
                                                 {% if user.is_authenticated %}
@@ -238,24 +240,6 @@
             <h3 class="company-info text-grey mt-5">Phương thức thanh toán</h3>
             <a class="icons icon-payment current" href=""></a>
         </div>
-        <!-- <div class="col-6 col-md fs15">
-          <h5>Resources</h5>
-          <ul class="list-unstyled">
-            <li><a class="link-secondary text-decoration-none" href="#">Business</a></li>
-            <li><a class="link-secondary text-decoration-none" href="#">Education</a></li>
-            <li><a class="link-secondary text-decoration-none" href="#">Government</a></li>
-            <li><a class="link-secondary text-decoration-none" href="#">Gaming</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-md">
-          <h5>About</h5>
-          <ul class="list-unstyled">
-            <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
-            <li><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
-            <li><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
-            <li><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
-          </ul>
-        </div> -->
     </div>
 </footer>
 </body>
@@ -267,4 +251,3 @@
         return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(value).replace('.00', '')
     }
 </script>
-
