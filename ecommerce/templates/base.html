@@ -63,8 +63,9 @@
                             <li><a class="dropdown-item" href="{% url 'store:store_home' %}">Tất cả</a></li>
                             {% for c in categories %}
                             <li>
-                                <a class="dropdown-item border-top" href="{{ c.get_absolute_url }}">{{
-                                    c.name|title}}</a>
+                                <a class="dropdown-item border-top" href="{{ c.get_absolute_url }}">
+                                    {{ c.name|title }}
+                                </a>
                             </li>
                             {% endfor %}
                         </ul>
