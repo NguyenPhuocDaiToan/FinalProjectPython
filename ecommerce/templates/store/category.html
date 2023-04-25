@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
 
 {% load static %}
 {% load common_tags %}
@@ -11,9 +11,9 @@
 {% block content %}
 
 
-<div class="container" style="max-width: 1000px; margin-top: 80px;">
+<div class="container" style="margin-top: 80px;">
     <div class="col-12">
-        <h1 class="h2">Danh mục: {{ category.name|title }}</h1>
+        <h1 class="h2" style="color: black !important;">Danh mục: {{ category.name|title }}</h1>
     </div>
     <div class="col-12 d-flex justify-content-between">
         <div class="h4"><b>Sản phẩm phổ biến</b></div>
@@ -34,7 +34,7 @@
                         <div class="card border-0 px-2 rounded">
                             {% for image in product.product_image.all %}
                             {% if image.is_feature%}
-                            <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}"
+                            <img class="img-fluid p-2" alt="Responsive image" src="{{ image.image.url }}"
                                  alt="{{ image.image.alt_text }}" style="height: 150px !important; object-fit: contain">
                             {% endif %}
                             {% endfor %}

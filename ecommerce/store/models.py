@@ -136,7 +136,7 @@ class ProductSpecificationValue(models.Model):
     products individual specification or bespoke features.
     """
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_specification")
     specification = models.ForeignKey(ProductSpecification, verbose_name=_("Thông số"), on_delete=models.RESTRICT)
     value = models.CharField(
         verbose_name=_("Giá trị"),
@@ -161,7 +161,7 @@ class ProductImage(models.Model):
     image = models.ImageField(
         verbose_name=_("Ảnh"),
         help_text=_("Upload ảnh sản phẩm"),
-        upload_to="images/",
+        upload_to="media/images/",
         default="images/default.png",
     )
     alt_text = models.CharField(

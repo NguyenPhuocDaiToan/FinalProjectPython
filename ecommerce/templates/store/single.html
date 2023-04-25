@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load common_tags %}
 
@@ -27,8 +27,9 @@
                         {% if image.is_feature %}
                         <a data-fancybox="gallery" href="{{ image.image.url }}">
                             <img src="{{ image.image.url }}" alt="{{ image.image.alt_text }}"
-                                 style="height: 320px;width:100%">
-                            <p class="view-album"><i class="fa fa-picture-o" aria-hidden="true"></i> Click xem album ảnh lớn
+                                 style="height: 320px;width:100%; object-fit: contain">
+                            <p class="view-album"><i class="fa fa-picture-o" aria-hidden="true"></i> Click xem album ảnh
+                                lớn
                             </p>
                         </a>
                         {% endif %}
@@ -69,18 +70,20 @@
             <div class="d-grid gap-2">
                 <div class="d-flex d-flex-inline justify-content-between">
                     <div>
-            <span class="h5">
-              Giá chính hãng:
-              <span class="h5" style="text-decoration: line-through;">{{ product.regular_price|currency }}</span>
-            </span>
+                        {% if product.discount_price > 0%}
+                        <span class="h5">
+                              Giá chính hãng:
+                              <span class="h5"
+                                    style="text-decoration: line-through;">{{ product.regular_price|currency }}</span>
+                            </span>
                         <br>
+                        {% endif %}
                         <div class="my-1">
-              <span class="h5">
-              Giá bán:
-              <span class="text-danger h4">{{ product.regular_price|subtract:product.discount_price|currency }}</span>
-            </span>
+                          <span class="h5">
+                          Giá bán:
+                          <span class="text-danger h4">{{ product.regular_price|subtract:product.discount_price|currency }}</span>
+                        </span>
                         </div>
-
                         <p class="text-muted">Giá đã bao gồm thuế</p>
                     </div>
                     <div>
@@ -93,9 +96,14 @@
                         </select>
                     </div>
                 </div>
-                <hr>
-                <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">Thêm vào giỏ
-                    hàng
+                <hr class="my-1">
+                <ul style="list-style: none; padding-left: 0 !important;" >
+                    {% for description in descriptions %}
+                        <li>{{ description }}</li>
+                    {% endfor %}
+                </ul>
+                <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">
+                    Thêm vào giỏ hàng
                 </button>
                 <a href="{% url 'account:user_wishlist' product.id  %}" class="btn btn-light fw500" role="button"
                    aria-disabled="true">
@@ -108,23 +116,12 @@
                 <div class="content">
                     <table class="table  table-striped">
                         <tbody>
+                        {% for specification in product.product_specification.all|slice:":3" %}
                         <tr>
-                            <td>Sản phẩm</td>
-                            <td>Tản nhiệt CPU</td>
+                            <td>{{specification.specification}}</td>
+                            <td>{{specification.value}}</td>
                         </tr>
-                        <tr>
-                            <td>Tên Hãng</td>
-                            <td>Gigabyte</td>
-                        </tr>
-                        <tr>
-                            <td>Model</td>
-                            <td>ATC800</td>
-                        </tr>
-                        <tr>
-                            <td>Loại tản nhiệt</td>
-                            <td>Tản nhiệt khí</td>
-                        </tr>
-
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -135,14 +132,15 @@
             <div class="clearfix"></div>
 
 
-            <div id="full-spec" class="content-text " style="display: none;">
+            <div id="full-spec" class="content-text " style="display: none; width: 70%">
                 <table width="789" class="table table-bordered">
                     <tbody>
+                    {% for specification in product.product_specification.all %}
                     <tr>
-                        <td width="202">Sản phẩm</td>
-                        <td width="587">Tản nhiệt CPU</td>
+                        <td>{{specification.specification}}</td>
+                        <td>{{specification.value}}</td>
                     </tr>
-
+                    {% endfor %}
                     </tbody>
                 </table>
                 <button data-fancybox-close="" class="fancybox-close-small" title="Close"></button>
@@ -213,12 +211,17 @@
                                                                               src="../../media/images/deepcool.png"
                                                                               alt="Deepcool">
                                                 </div>
-                                                <h3 class="p-name"><a href="{{ image.image.url }}">Tản
-                                                    nhiệt khí Deepcool Neptwin White</a></h3><span class="p-price">1.390.000đ</span>&nbsp;<span
-                                                        class="p-old-price">1.699.000đ</span><span
-                                                        class="p-discount icons">-19%</span>
-                                                <div class="p-bottom"><span class="p-buy icons"
-                                                                            onclick="listenBuyProduct(6770,0,1)"></span>
+                                                <h3 class="p-name">
+                                                    <a href="{{ image.image.url }}">
+                                                        Tản nhiệt khí Deepcool Neptwin White
+                                                    </a>
+                                                </h3>
+                                                <span class="p-price">1.390.000đ</span>&nbsp;
+                                                <span class="p-old-price">1.699.000đ</span>
+                                                <span class="p-discount icons">-19%</span>
+                                                <div class="p-bottom">
+                                                    <span class="p-buy icons"
+                                                          onclick="listenBuyProduct(6770,0,1)"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -311,70 +314,71 @@
         });
     })
 
-  $(document).ready(function () {
-    $('.js-content-tab').not(':first').hide();
-    $('.js-title-tab').click(function () {
-      var tab = $(this).attr('data-tab');
-      $('.js-content-tab').hide();
-      $(tab).show();
-      $('.js-title-tab').removeClass('active');
-      $(this).addClass('active');
+    $(document).ready(function () {
+        $('.js-content-tab').not(':first').hide();
+        $('.js-title-tab').click(function () {
+            var tab = $(this).attr('data-tab');
+            $('.js-content-tab').hide();
+            $(tab).show();
+            $('.js-title-tab').removeClass('active');
+            $(this).addClass('active');
+        });
     });
-  });
 
 
-  $("#img-thumbs .item").click(function () {
-    var src = $(this).find("a").attr("href");
-    $("#img-large a").attr("href", src);
-    $("#img-large img").attr("src", src);
+    $("#img-thumbs .item").click(function () {
+        var src = $(this).find("a").attr("href");
+        $("#img-large a").attr("href", src);
+        $("#img-large img").attr("src", src);
 
-    return false;
-  });
-  $("#img-product .owl-carousel").owlCarousel({
-    items: 5,
-    margin: 2,
-    loop: true,
-    dots: false,
-    nav: true,
-    navText: ['<span class="fa fa-chevron-left"></span>', '<span class="fa fa-chevron-right"></span>'],
-    autoplay: true,
-    autoplayTimeout: 2000,
-    autoplaySpeed: 800
-  });
-  $("#img-thumbs .owl-carousel").owlCarousel({
-    items: 3,
-    margin: 5,
-    dots: false,
-    nav: true,
-    navText: ['<span class="fa fa-chevron-left"></span>', '<span class="fa fa-chevron-right"></span>']
+        return false;
+    });
+    $("#img-product .owl-carousel").owlCarousel({
+        items: 5,
+        margin: 2,
+        loop: true,
+        dots: false,
+        nav: true,
+        navText: ['<span class="fa fa-chevron-left"></span>', '<span class="fa fa-chevron-right"></span>'],
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplaySpeed: 800
+    });
+    $("#img-thumbs .owl-carousel").owlCarousel({
+        items: 3,
+        margin: 5,
+        dots: false,
+        nav: true,
+        navText: ['<span class="fa fa-chevron-left"></span>', '<span class="fa fa-chevron-right"></span>']
 
-  });
+    });
 
-  $("[data-fancybox='gallery'],[data-fancybox='gallery2']").fancybox({
-    thumbs: {
-      autoStart: true,
-    }
-  });
-  $('[data-fancybox]').fancybox({
-    touch: false
-  });
+    $("[data-fancybox='gallery'],[data-fancybox='gallery2']").fancybox({
+        thumbs: {
+            autoStart: true,
+        }
+    });
+    $('[data-fancybox]').fancybox({
+        touch: false
+    });
 
-  $(document).on('click', '#add-button', function (e) {
-      e.preventDefault();
-      $.ajax({
-        type: 'POST',
-        url: '{% url "basket:basket_add" %}',
-        data: {
-          productid: $('#add-button').val(),
-          productqty: $('#select option:selected').text(),
-          csrfmiddlewaretoken: "{{csrf_token}}",
-          action: 'post'
-        },
-        success: function (json) {
-          document.getElementById("basket-qty").innerHTML = json.qty
-        },
-        error: function (xhr, errmsg, err) {}
-      });
+    $(document).on('click', '#add-button', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_add" %}',
+            data: {
+                productid: $('#add-button').val(),
+                productqty: $('#select option:selected').text(),
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'post'
+            },
+            success: function (json) {
+                document.getElementById("basket-qty").innerHTML = json.qty
+            },
+            error: function (xhr, errmsg, err) {
+            }
+        });
     })
 </script>
 
