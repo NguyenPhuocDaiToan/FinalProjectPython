@@ -13,20 +13,21 @@ class UserAddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["full_name"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": "Tên người nhận"}
         )
+
         self.fields["phone"].widget.attrs.update({"class": "form-control mb-2 account-form", "placeholder": "Phone"})
         self.fields["address_line"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": "Địa chỉ 1"}
         )
         self.fields["address_line2"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": "Địa chỉ 2"}
         )
         self.fields["town_city"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": "Thành phố"}
         )
         self.fields["postcode"].widget.attrs.update(
-            {"class": "form-control mb-2 account-form", "placeholder": "Full Name"}
+            {"class": "form-control mb-2 account-form", "placeholder": "Mã bưu chính"}
         )
 
 
@@ -78,7 +79,7 @@ class RegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update(
-            {'class': 'form-control mb-3', 'placeholder': 'Name'})
+            {'class': 'form-control mb-3', 'placeholder': 'Username'})
         self.fields['email'].widget.attrs.update(
             {'class': 'form-control mb-3', 'placeholder': 'E-mail', 'name': 'email', 'id': 'id_email'})
         self.fields['password'].widget.attrs.update(
@@ -111,21 +112,17 @@ class PwdResetConfirmForm(SetPasswordForm):
 
 class UserEditForm(forms.ModelForm):
     email = forms.EmailField(
-        label='Account email (can not be changed)', max_length=200, widget=forms.TextInput(
+        label='Email (không thể chỉnh sửa)', max_length=200, widget=forms.TextInput(
             attrs={'class': 'form-control mb-3', 'placeholder': 'email', 'id': 'form-email', 'readonly': 'readonly'}))
 
     name = forms.CharField(
-        label='Firstname', min_length=4, max_length=50, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'Name', 'id': 'form-firstname',
-                   'readonly': 'readonly'}))
+        label='Tên người dùng', min_length=4, max_length=50, widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'Name', 'id': 'form-firstname'}))
 
-    first_name = forms.CharField(
-        label='Username', min_length=4, max_length=50, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'Firstname', 'id': 'form-lastname'}))
 
     class Meta:
         model = Customer
-        fields = ('email', 'name', 'first_name',)
+        fields = ('email', 'name',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

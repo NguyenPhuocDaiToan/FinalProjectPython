@@ -81,12 +81,6 @@ z-index: 100;
   top: 50%;
 }
 
-/* #img-thumbs .owl-nav button{position:absolute;top:50%} */
-span {
-
-  font-size: 30px;
-
-}
 a, a:hover {
   text-decoration: none;
   color: cadetblue;
@@ -113,7 +107,7 @@ a{
   height: 20%;
   display: block;
   position: absolute;
-  bottom: 10%;
+  bottom: 16%;
   width: 650px;
 }
 

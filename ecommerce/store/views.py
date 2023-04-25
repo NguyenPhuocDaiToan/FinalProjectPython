@@ -19,4 +19,5 @@ def category_list(request, category_slug=None):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product.objects.prefetch_related('product_specification'), slug=slug)
-    return render(request, "store/single.html", {"product": product})
+    descriptions = product.description.split("\r\n", -1)
+    return render(request, "store/single.html", {"product": product, "descriptions": descriptions})

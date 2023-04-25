@@ -2,7 +2,7 @@
 {% load static %}
 {% load common_tags %}
 
-{% block stylesheet %}{% static 'css/store.css' %}{% endblock %}
+{% block stylesheet %}{% static '/css/store.css' %}{% endblock %}
 {% block title %}
 {% if product %}{{ product.title }}{% else %}Product{% endif %}
 {% endblock %}
@@ -27,7 +27,7 @@
                         {% if image.is_feature %}
                         <a data-fancybox="gallery" href="{{ image.image.url }}">
                             <img src="{{ image.image.url }}" alt="{{ image.image.alt_text }}"
-                                 style="height: 320px;width:100%">
+                                 style="height: 320px;width:100%; object-fit: contain">
                             <p class="view-album"><i class="fa fa-picture-o" aria-hidden="true"></i> Click xem album ảnh
                                 lớn
                             </p>
@@ -70,12 +70,14 @@
             <div class="d-grid gap-2">
                 <div class="d-flex d-flex-inline justify-content-between">
                     <div>
+                        {% if product.discount_price > 0%}
                         <span class="h5">
-                          Giá chính hãng:
-                          <span class="h5"
-                                style="text-decoration: line-through;">{{ product.regular_price|currency }}</span>
-                        </span>
+                              Giá chính hãng:
+                              <span class="h5"
+                                    style="text-decoration: line-through;">{{ product.regular_price|currency }}</span>
+                            </span>
                         <br>
+                        {% endif %}
                         <div class="my-1">
                           <span class="h5">
                           Giá bán:
@@ -94,9 +96,14 @@
                         </select>
                     </div>
                 </div>
-                <hr>
-                <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">Thêm vào giỏ
-                    hàng
+                <hr class="my-1">
+                <ul style="list-style: none; padding-left: 0 !important;" >
+                    {% for description in descriptions %}
+                        <li>{{ description }}</li>
+                    {% endfor %}
+                </ul>
+                <button type="button" id="add-button" value="{{product.id}}" class="btn btn-success fw500">
+                    Thêm vào giỏ hàng
                 </button>
                 <a href="{% url 'account:user_wishlist' product.id  %}" class="btn btn-light fw500" role="button"
                    aria-disabled="true">
@@ -125,15 +132,15 @@
             <div class="clearfix"></div>
 
 
-            <div id="full-spec" class="content-text " style="display: none;">
+            <div id="full-spec" class="content-text " style="display: none; width: 70%">
                 <table width="789" class="table table-bordered">
                     <tbody>
-                        {% for specification in product.product_specification.all %}
-                        <tr>
-                            <td>{{specification.specification}}</td>
-                            <td>{{specification.value}}</td>
-                        </tr>
-                        {% endfor %}
+                    {% for specification in product.product_specification.all %}
+                    <tr>
+                        <td>{{specification.specification}}</td>
+                        <td>{{specification.value}}</td>
+                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
                 <button data-fancybox-close="" class="fancybox-close-small" title="Close"></button>
@@ -204,12 +211,17 @@
                                                                               src="../../media/images/deepcool.png"
                                                                               alt="Deepcool">
                                                 </div>
-                                                <h3 class="p-name"><a href="{{ image.image.url }}">Tản
-                                                    nhiệt khí Deepcool Neptwin White</a></h3><span class="p-price">1.390.000đ</span>&nbsp;<span
-                                                        class="p-old-price">1.699.000đ</span><span
-                                                        class="p-discount icons">-19%</span>
-                                                <div class="p-bottom"><span class="p-buy icons"
-                                                                            onclick="listenBuyProduct(6770,0,1)"></span>
+                                                <h3 class="p-name">
+                                                    <a href="{{ image.image.url }}">
+                                                        Tản nhiệt khí Deepcool Neptwin White
+                                                    </a>
+                                                </h3>
+                                                <span class="p-price">1.390.000đ</span>&nbsp;
+                                                <span class="p-old-price">1.699.000đ</span>
+                                                <span class="p-discount icons">-19%</span>
+                                                <div class="p-bottom">
+                                                    <span class="p-buy icons"
+                                                          onclick="listenBuyProduct(6770,0,1)"></span>
                                                 </div>
                                             </div>
                                         </div>

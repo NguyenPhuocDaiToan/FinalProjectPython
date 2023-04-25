@@ -1,10 +1,11 @@
 {% extends "../sub_base.html" %}
+{% load common_tags %}
 {% block title %}Danh sách ưa thích{% endblock %}
 
 {% block sub_content %}
 <div class="col-12 mx-auto">
   <h1 class="h3">Danh sách yêu thích</h1>
-  <div>Quản lý danh sách yêu thích</div>
+  <div class="fw-bold">Quản lý danh sách yêu thích</div>
   <hr />
 
   {% if wishlist %}
@@ -15,7 +16,7 @@
       <div class="col-md-2">
         {% for image in product.product_image.all  %}
           {% if image.is_feature %}
-          <img class="img-fluid d-block p-2" width="135px" src="{{ image.image.url }}"
+          <img class="img-fluid d-block p-2" width="100%" src="{{ image.image.url }}"
             alt="{{ image.image.alt_text }}" />
           {% endif %}
         {% endfor %}
@@ -23,9 +24,9 @@
       <div class="col-md-10">
         <div class="card-body">
           <h5 class="card-title">{{product.title}}</h5>
-          <p class="card-text">{{product.description}}</p>
-          <p class="card-text"><small class="text-muted">{{product.regular_price}}</small></p>
-          <a type="button" class="btn btn-primary fw500 btn-sm" href="{% url 'account:user_wishlist' product.id %}">Remove from Wishlist</a>
+          <p class="card-text">Mô tả: {{product.description}}</p>
+          <p class="card-text fw-bold text-danger"><small>Giá sản phẩm: {{product.regular_price|currency}}</small></p>
+          <a type="button" class="btn btn-primary fw500 btn-sm" href="{% url 'account:user_wishlist' product.id %}">Xoá khỏi danh sách ưa thích</a>
         </div>
       </div>
     </div>

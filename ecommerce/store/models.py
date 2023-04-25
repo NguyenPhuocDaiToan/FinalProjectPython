@@ -161,7 +161,7 @@ class ProductImage(models.Model):
     image = models.ImageField(
         verbose_name=_("Ảnh"),
         help_text=_("Upload ảnh sản phẩm"),
-        upload_to="images/",
+        upload_to="media/images/",
         default="images/default.png",
     )
     alt_text = models.CharField(
