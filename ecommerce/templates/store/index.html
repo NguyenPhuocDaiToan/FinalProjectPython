@@ -11,7 +11,7 @@
 <!-- header -->
 <div class="hero-banner">
     <div class="content">
-        <div class="text-content">
+        <div class="text-content col-12 col-xl-6 p-30">
             <h1>SALES</h1>
             <p> Convallis interdum purus adipiscing dis parturient
                 posuere ac a quam a eleifend montes parturient posuere
@@ -22,7 +22,7 @@
                 <div class="banner-more shop">Shop Now</div>
             </div>
         </div>
-        <img class="banner-img" src="/media/images/banner-img.png" alt="" />
+        <img class="banner-img col-12 col-xl-6" src="/media/images/banner-img.png" alt="" />
     </div>
 </div>
 
@@ -57,7 +57,9 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 bg-white">
                     {% for product in products %}
                     <div class="col p-item p-3 mt-0">
+                        
                         <div class="card border-0">
+
                             {% for image in product.product_image.all %}
                                 {% if image.is_feature%}
                                 <img class="img-fluid" src="{{ image.image.url }}"
@@ -70,7 +72,10 @@
                                     <a class="text-dark text-decoration-none name-product"
                                        href="{{ product.get_absolute_url }}">{{ product.title }}</a>
                                 </p>
-                                <div class="fw-bold">{{product.regular_price|currency}}</div>
+                                <span class="fw-bold">{{ product.regular_price|subtract:product.discount_price|currency }}</span>
+                                <span class="p-old-price">{{product.regular_price|currency}}</span>
+                                <span class="p-discount icons">-7%</span>
+                                <div class="p-bottom"><span class="p-buy icons" onclick="listenBuyProduct(18064,0,1)"></span></div>
                             </div>
                         </div>
                     </div>

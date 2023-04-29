@@ -28,9 +28,9 @@
                     <a href="{% url 'store:store_home' %}">Quay lại trang chủ</a>
                 </div>
             {% else %}
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 bg-white">
                     {% for product in products %}
-                    <div class="col">
+                    <div class="col p-item">
                         <div class="card border-0 px-2 rounded">
                             {% for image in product.product_image.all %}
                             {% if image.is_feature%}
@@ -45,7 +45,10 @@
                                         {{ product.title }}...
                                     </a>
                                 </p>
-                                <div class="fw-bold">{{product.regular_price|currency}}</div>
+                                <span class="fw-bold">{{ product.regular_price|subtract:product.discount_price|currency }}</span>
+                                <span class="p-old-price">{{product.regular_price|currency}}</span>
+                                <span class="p-discount icons">-7%</span>
+                                <div class="p-bottom"><span class="p-buy icons" onclick="listenBuyProduct(18064,0,1)"></span></div>
                             </div>
                         </div>
                     </div>
