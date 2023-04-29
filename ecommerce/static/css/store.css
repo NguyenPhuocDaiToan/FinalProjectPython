@@ -107,8 +107,8 @@ a{
   height: 20%;
   display: block;
   position: absolute;
-  bottom: 16%;
-  width: 650px;
+  bottom: 8%;
+  width: 665px;
 }
 
 .btn:hover {
@@ -156,11 +156,7 @@ a{
   background: #fff
 }
 
-@media (min-width: 1650px) {
-  .p-item {
-    width: 16.6666667%
-  }
-}
+
 
 .p-item .p-img img:hover {
   transform: scale(1.1);
@@ -168,7 +164,7 @@ a{
 }
 
 .owl-carousel .p-item {
-  width: 99%;
+  width: 85%;
   
 }
 

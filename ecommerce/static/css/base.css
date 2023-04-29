@@ -29,7 +29,9 @@
 .alert-primary{
     background-color: #E4F1FF;
 }
-
+.margin-right-10{
+    margin-right: 10%!important;
+}
 
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
