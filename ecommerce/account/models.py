@@ -59,7 +59,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
         send_mail(
             subject,
             message,
-            'l@1.com',
+            'daitoan2000@gmail.com',
             [self.email],
             fail_silently=False,
         )

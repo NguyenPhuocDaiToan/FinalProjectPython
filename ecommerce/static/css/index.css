@@ -537,3 +537,12 @@ h1, h2, h3, h4, h5, h6 {
     height: 18px;
     background-position: -249px -15px;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: cadetblue;
+}

@@ -1,8 +1,8 @@
 {% autoescape off %}
-Hi {{ user.user_name }},
+Xin chào <span class="fw-bold">{{ user.name }}</span>,
 
 Tài khoản của bạn đã được tạo thành công.
-<br>
+
 Vui lòng nhấp vào liên kết bên dưới để kích hoạt tài khoản của bạn
 
 http://{{ domain }}{% url 'account:activate' uidb64=uid token=token %}
