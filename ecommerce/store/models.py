@@ -85,6 +85,12 @@ class Product(models.Model):
         help_text=_("Bắt buộc"),
         max_length=255,
     )
+    brand = models.CharField(
+        verbose_name=_("Hãng sản phẩm"),
+        help_text=_("Bắt buộc"),
+        max_length=255,
+        default=''
+    )
     description = models.TextField(verbose_name=_("mô tả"), help_text=_("Không bắt buộc"), blank=True)
     slug = models.SlugField(max_length=255)
     regular_price = models.DecimalField(
@@ -161,7 +167,7 @@ class ProductImage(models.Model):
     image = models.ImageField(
         verbose_name=_("Ảnh"),
         help_text=_("Upload ảnh sản phẩm"),
-        upload_to="media/images/",
+        upload_to="images",
         default="images/default.png",
     )
     alt_text = models.CharField(

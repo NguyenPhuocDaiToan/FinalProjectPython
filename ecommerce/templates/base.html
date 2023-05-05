@@ -71,8 +71,8 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex col-6" style="margin-right:10%;">
-                    <input class="form-control me-2" type="search" placeholder="Search products or FAQ" aria-label="Search">
+                <form class="d-flex col-6" style="margin-right:10%;" action="{% url 'store:search' %}">
+                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm sản phẩm" aria-label="Search" name="q">
                     <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -196,7 +196,7 @@
         <div class="col-12 col-md mb-3">
             <img src="/media/images/brand.svg" class="navbar-brand-img" alt="...">
             <small class="d-block mb-4 text-muted mt-2">&copy; 2017-2023</small>
-            <h5>Công Ty TNHH Tin Học LANDKIT </h5>
+            <h5>Công Ty TNHH Tin Học LANDKIT</h5>
             <i class="fa fa-map-marker text-grey" aria-hidden="true"> </i>
             <span class="text-grey bf-space">54 Lê Lợi - Thành phố Đà Nẵng</span>
             <br/>

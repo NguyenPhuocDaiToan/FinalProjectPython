@@ -45,9 +45,9 @@
                                         {{ product.title }}...
                                     </a>
                                 </p>
-                                <span class="fw-bold">{{ product.regular_price|subtract:product.discount_price|currency }}</span>
-                                <span class="p-old-price">{{product.regular_price|currency}}</span>
-                                <span class="p-discount icons">-7%</span>
+                                <span class="fw-bold text-danger">{{ product.regular_price|subtract:product.discount_price|currency }}</span>
+                                <span class="p-old-price" style="margin-left: 4px">{{product.regular_price|currency}}</span>
+                                <span class="p-discount icons">-{{product.regular_price|percentReduce:product.discount_price}}%</span>
                                 <div class="p-bottom"><span class="p-buy icons" onclick="listenBuyProduct(18064,0,1)"></span></div>
                             </div>
                         </div>
@@ -57,6 +57,44 @@
             {% endif %}
         </div>
     </div>
+
+    <nav aria-label="Page navigation example">
+            <ul class="pagination pull-right">
+                <span class="current-page d-flex align-items-center text-dark fw-bold" style="padding-right: 16px">
+                    Trang {{ products.number }}/{{ products.paginator.num_pages }}
+                </span>
+                {% if products.has_previous %}
+                <li class="page-item">
+                    <a href="?page=1" class="page-link">&laquo; Trang đầu</a>
+                </li>
+                <li class="page-item">
+                    <a href="?page={{ products.previous_page_number }}" class="page-link">Trang trước</a>
+                </li>
+                {% endif %}
+
+                {% for i in products.paginator.page_range %}
+                {% if i == products.number %}
+                <li class="page-item disabled">
+                    <span class="current-page page-link">{{ i }}</span>
+                </li>
+                {% elif i > products.number|add:'-3' and i < products.number|add:'3' %}
+                <li class="page-item">
+                    <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                {% if products.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ products.next_page_number }}" class="page-link">Trang kế</a>
+                </li>
+                <li class="page-item">
+                    <a href="?page={{ products.paginator.num_pages }}" class="page-link">Trang cuối &raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+
+        </nav>
 </div>
 
 {% endblock %}

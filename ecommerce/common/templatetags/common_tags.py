@@ -34,7 +34,13 @@ def splitter(value, sep='.'):
 def subtract(value, arg):
     return value - arg
 
+
 @register.filter
 def currency(value):
     locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
     return locale.currency(value, grouping=True).replace('.00', '')
+
+
+@register.filter
+def percentReduce(regularPrice, discountPrice):
+    return int(discountPrice / regularPrice * 100)
