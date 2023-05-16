@@ -1,7 +1,10 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
+
 {% load static %}
 {% load common_tags %}
+
 {% block title %}Giỏ hàng{%endblock %}
+
 {% block content %}
 
 
@@ -15,12 +18,15 @@
     <hr/>
 </div>
 <div class="container mt-4">
+    <div id="empty-basket">
+
+    </div>
     <div class="row g-3">
         {% if basket|length == 0 %}
         <div class="col-12">Giỏ hàng của bạn đang trống <a href="{% url 'store:store_home' %}">Trang chủ</a></div>
         {% else %}
 
-        <div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
+        <div class="col-md-5 col-lg-4 order-md-last p-0 order-3" id="checkout">
             <div class="d-grid gap-2" style="margin-left: 16px">
                 <span class="text-danger fw-bold"
                       id="total">Tổng tiền sản phẩm: {{basket.get_subtotal_price|currency}}</span>
@@ -47,21 +53,17 @@
                             <a class="text-decoration-none" href="{{item.product.get_absolute_url}}">
                                 <div class="card-text">{{product.title}}</div>
                             </a>
+
                             <div class="card-text my-2">Giá sản phẩm:
                                 <span class="text-danger">{{product.regular_price|currency}}</span>
                             </div>
-                            <label>Số lượng:</label>
-                            <select id="select{{product.id}}" style="width:50px;height:31px;">
-                                <option value="" selected disabled hidden>{{item.qty}}</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
-                            </select>
-                            <a type="button" id="update-button" data-index="{{product.id}}"
-                               class="update-button text-decoration-none small ps-3">Cập nhật</a>
-                            <a type="button" id="delete-button" data-index="{{product.id}}"
-                               class="delete-button text-decoration-none small" style="margin-left: 20px">Xoá</a>
+
+                            <label for="quantity-{{product.id}}">Số lượng:</label>
+
+                            <button data-index="{{product.id}}" class="change-quantity" data-type="sub">-</button>
+                            <input type="number" id="quantity-{{product.id}}" value="{{item.qty}}"
+                                   style="width: 45px; text-align: center">
+                            <button data-index="{{product.id}}" class="change-quantity" data-type="add">+</button>
                         </div>
                     </div>
                 </div>
@@ -74,55 +76,67 @@
 </div>
 
 <script>
-    // Delete Item
-    $(document).on("click", ".delete-button", function (e) {
+    // Change quantity
+    $(document).on("click", ".change-quantity", function (e) {
         e.preventDefault();
-        var prodid = $(this).data("index");
+        let id = $(this).data("index");
+        let type = $(this).data("type");
+        let input = $('#quantity-'+id);
+        let quantity = type === 'add' ? +input.val() + 1 : +input.val() - 1;
+        quantity === 0 ? delete_product(id) : update_quantity(id, quantity);
+    });
+
+    // Remove product out basket
+    function delete_product(id) {
         $.ajax({
             type: "POST",
             url: '{% url "basket:basket_delete" %}',
             data: {
-                productid: $(this).data("index"),
+                product_id: id,
                 csrfmiddlewaretoken: "{{csrf_token}}",
                 action: "post",
             },
             success: function (json) {
-                $('.product-item[data-index="' + prodid + '"]').remove();
+                $('.product-item[data-index="' + id + '"]').remove();
 
                 if (json.qty === 0) {
-                    total = 0
-                    subtotal = 0
+                    total = 0;
+                    $('#checkout').remove();
+                    $('#empty-basket').html(
+                        `<div className="col-12">
+                            Giỏ hàng của bạn đang trống
+                            <a href="{% url 'store:store_home' %}">Trang chủ</a>
+                        </div>`
+                    );
                 } else {
                     total = parseFloat(json.subtotal).toFixed(2);
+                    document.getElementById("total").innerHTML = 'Tổng tiền sản phẩm: ' + format_currency(Number(total));
                 }
-
-                document.getElementById("total").innerHTML = 'Tổng tiền sản phẩm: ' + format_currency(Number(total));
             },
             error: function (xhr, errmsg, err) {
             },
         });
-    });
+    }
 
-    // Update Item
-    $(document).on("click", ".update-button", function (e) {
-        e.preventDefault();
-        var prodid = $(this).data("index");
+    // Update product in basket
+    function update_quantity(id, quantity) {
         $.ajax({
             type: "POST",
             url: '{% url "basket:basket_update" %}',
             data: {
-                productid: $(this).data("index"),
-                productqty: $("#select" + prodid + " option:selected").text(),
+                product_id: id,
+                product_qty: quantity,
                 csrfmiddlewaretoken: "{{csrf_token}}",
                 action: "post",
             },
             success: function (json) {
                 document.getElementById("total").innerHTML = 'Tổng tiền sản phẩm: ' + format_currency(Number(json.subtotal));
+                $('#quantity-'+id).val(quantity);
             },
             error: function (xhr, errmsg, err) {
             },
         });
-    });
+    }
 </script>
 
 {% endblock %}
