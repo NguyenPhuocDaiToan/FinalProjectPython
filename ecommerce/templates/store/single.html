@@ -4,7 +4,7 @@
 
 {% block stylesheet %}{% static '/css/store.css' %}{% endblock %}
 {% block title %}
-{% if product %}{{ product.title }}{% else %}Product{% endif %}
+{% if product %}{{ product.title }}{% else %}Chi tiết{% endif %}
 {% endblock %}
 {% block content %}
 
@@ -87,13 +87,11 @@
                         <p class="text-muted">Giá đã bao gồm thuế</p>
                     </div>
                     <div>
-                        <label for="select">Số lượng:</label>
-                        <select id="select" class="h6 store-select-dropdown">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                        <label for="quantity-product">Số lượng:</label>
+                        <button class="change-quantity" data-type="sub">-</button>
+                        <input type="number" id="quantity-product" value="1"
+                               style="width: 45px; text-align: center">
+                        <button class="change-quantity" data-type="add">+</button>
                     </div>
                 </div>
                 <hr class="my-1">
@@ -115,21 +113,21 @@
                 <div class="title mb-2">Thông số kỹ thuật
                 </div>
                 <div class="content">
-                        <table class="table  table-striped">
-                            <tbody>
-                            {% for specification in product.product_specification.all|slice:":3" %}
-                            <tr>
-                                <td>{{specification.specification}}</td>
-                                <td>{{specification.value}}</td>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="table  table-striped">
+                        <tbody>
+                        {% for specification in product.product_specification.all|slice:":3" %}
+                        <tr>
+                            <td>{{specification.specification}}</td>
+                            <td>{{specification.value}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
                 {% if product.product_specification.all|length == 0 %}
-                    <div>
-                        Đang cập nhật ...
-                    </div>
+                <div>
+                    Đang cập nhật ...
+                </div>
                 {% endif %}
 
                 {% if product.product_specification.all|length > 3 %}
@@ -326,25 +324,6 @@
             touch: false
         });
 
-        $(document).on('click', '#add-button', function (e) {
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '{% url "basket:basket_add" %}',
-                data: {
-                    productid: $('#add-button').val(),
-                    productqty: $('#select option:selected').text(),
-                    csrfmiddlewaretoken: "{{csrf_token}}",
-                    action: 'post'
-                },
-                success: function (json) {
-                    document.getElementById("basket-qty").innerHTML = json.qty
-                },
-                error: function (xhr, errmsg, err) {
-                }
-            });
-        })
-
         $(document).ready(function () {
             $('.js-content-tab').not(':first').hide();
             $('.js-title-tab').click(function () {
@@ -399,8 +378,8 @@
                 type: 'POST',
                 url: '{% url "basket:basket_add" %}',
                 data: {
-                    productid: $('#add-button').val(),
-                    productqty: $('#select option:selected').text(),
+                    product_id: $('#add-button').val(),
+                    product_qty: $('#quantity-product').val(),
                     csrfmiddlewaretoken: "{{csrf_token}}",
                     action: 'post'
                 },
@@ -411,6 +390,16 @@
                 }
             });
         })
+
+            // Change quantity
+    $(document).on("click", ".change-quantity", function (e) {
+        e.preventDefault();
+        let id = $(this).data("index");
+        let type = $(this).data("type");
+        let input = $('#quantity-product');
+        let quantity = type === 'add' ? +input.val() + 1 : +input.val() - 1;
+        quantity === 0 ? input.val(1) : input.val(quantity);
+    });
     </script>
 
 </div>

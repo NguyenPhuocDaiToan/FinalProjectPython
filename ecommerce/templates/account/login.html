@@ -4,7 +4,6 @@
 {% block stylesheet %}{% static '/css/register.css' %}{% endblock %}
 {% block sub_content %}
 
-
 <section>
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -36,7 +35,7 @@
 
                     {% if form.errors %}
                     <div class="alert alert-primary" role="alert">
-                        Lỗi: Username hoặc Mật khẩu không đúng!
+                        Lỗi: Đăng nhập không thành công!
                     </div>
                     {% endif %}
                     <label class="form-label">{{ form.username.label}}</label>
