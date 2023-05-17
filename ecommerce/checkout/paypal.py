@@ -2,7 +2,6 @@ import sys
 
 from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment
 
-
 class PayPalClient:
     def __init__(self):
         self.client_id = "AQAfFYjRpMU8-YYvcRz3sc7d13iaboZFiAnvuLz67pjVVIiIXYpirEXlbpS6TPKmhzNH0flAflS2u_mZ"

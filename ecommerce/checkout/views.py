@@ -42,7 +42,7 @@ def basket_update_delivery(request):
 def delivery_address(request):
     session = request.session
     if "purchase" not in request.session:
-        messages.success(request, "Please select delivery option")
+        messages.success(request, "Vui lòng chọn phương thức giao hàng")
         return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
     addresses = Address.objects.filter(customer=request.user).order_by("-default")

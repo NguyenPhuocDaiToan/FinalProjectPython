@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-
 class DeliveryOptions(models.Model):
     """
         The Delivery methods table containing all delivery
@@ -42,7 +41,6 @@ class DeliveryOptions(models.Model):
         help_text=_("Bắt buộc"),
         max_length=255,
     )
-
     order = models.IntegerField(verbose_name=_("Thứ tự ưu tiên:"), help_text=_("Bắt buộc"), default=0)
     is_active = models.BooleanField(verbose_name=_("Trạng thái hoạt động"), default=True)
 
