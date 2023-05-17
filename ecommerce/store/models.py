@@ -6,10 +6,6 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Category(MPTTModel):
-    """
-    Category Table implimented with MPTT.
-    """
-
     name = models.CharField(
         verbose_name=_("Tên danh mục:"),
         help_text=_("Bắt buộc và duy nhất"),
@@ -41,11 +37,6 @@ class Category(MPTTModel):
 
 
 class ProductType(models.Model):
-    """
-    ProductType Table will provide a list of the different types
-    of products that are for sale.
-    """
-
     name = models.CharField(verbose_name=_("Loại sản phẩm"), help_text=_("Bắt buộc"), max_length=255, unique=True)
     is_active = models.BooleanField(verbose_name=_("Trạng thái hoạt động"), default=True)
 
@@ -137,11 +128,6 @@ class Product(models.Model):
 
 
 class ProductSpecificationValue(models.Model):
-    """
-    The Product Specification Value table holds each of the
-    products individual specification or bespoke features.
-    """
-
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_specification")
     specification = models.ForeignKey(ProductSpecification, verbose_name=_("Thông số"), on_delete=models.RESTRICT)
     value = models.CharField(
@@ -159,10 +145,6 @@ class ProductSpecificationValue(models.Model):
 
 
 class ProductImage(models.Model):
-    """
-    The Product Image table.
-    """
-
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_image")
     image = models.ImageField(
         verbose_name=_("Ảnh"),

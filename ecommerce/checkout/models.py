@@ -1,11 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-class DeliveryOptions(models.Model):
-    """
-        The Delivery methods table containing all delivery
-    """
 
+class DeliveryOptions(models.Model):
     DELIVERY_CHOICES = [
         ("standard-shipping", "Standard Shipping"),
         ("express-shipping", "Express Shipping"),
@@ -53,10 +50,6 @@ class DeliveryOptions(models.Model):
 
 
 class PaymentSelections(models.Model):
-    """
-    Store payment options
-    """
-
     name = models.CharField(
         verbose_name=_("name"),
         help_text=_("Bắt buộc"),

@@ -9,10 +9,11 @@ from account.models import Address
 from basket.basket import Basket
 from orders.models import Order, OrderItem
 from .models import DeliveryOptions
-
+from paypalcheckoutsdk.orders import OrdersGetRequest
+from .paypal import PayPalClient
 
 @login_required
-def deliverychoices(request):
+def delivery_choices(request):
     deliveryOptions = DeliveryOptions.objects.filter(is_active=True)
     return render(request, "checkout/delivery_choices.html", {"deliveryoptions": deliveryOptions})
 
@@ -21,28 +22,30 @@ def deliverychoices(request):
 def basket_update_delivery(request):
     basket = Basket(request)
     if request.POST.get("action") == "post":
-        delivery_option = int(request.POST.get("deliveryoption"))
-        delivery_type = DeliveryOptions.objects.get(id=delivery_option)
-        updated_total_price = basket.basket_update_delivery(delivery_type.delivery_price)
+        delivery_id = int(request.POST.get("delivery_id"))
+        delivery = DeliveryOptions.objects.get(id=delivery_id)
+        updated_total_price = basket.basket_update_delivery(delivery.delivery_price)
 
         session = request.session
-        if "purchase" not in request.session:
-            session["purchase"] = {
-                "delivery_id": delivery_type.id,
+        # nếu không tồn tại delivery thì khởi tạo, còn tồn tại thì update
+        if "delivery" not in request.session:
+            session["delivery"] = {
+                "delivery_id": delivery.id,
             }
         else:
-            session["purchase"]["delivery_id"] = delivery_type.id
+            session["delivery"]["delivery_id"] = delivery.id
             session.modified = True
 
-        response = JsonResponse({"total": updated_total_price, "delivery_price": delivery_type.delivery_price})
+        response = JsonResponse({"total": updated_total_price, "delivery_price": delivery.delivery_price})
         return response
 
 
 @login_required
 def delivery_address(request):
     session = request.session
-    if "purchase" not in request.session:
-        messages.success(request, "Vui lòng chọn phương thức giao hàng")
+    if "delivery" not in request.session:
+        messages.success(request, "Vui lòng chọn phương thức vận chuyển")
+        # chưa chọn thì quay lại trang gửi request thông báo cho người dùng
         return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
     addresses = Address.objects.filter(customer=request.user).order_by("-default")
@@ -56,21 +59,9 @@ def delivery_address(request):
     return render(request, "checkout/delivery_address.html", {"addresses": addresses})
 
 
-@login_required
-def payment_selection(request):
-    session = request.session
-    if "address" not in request.session:
-        messages.success(request, "Please select address option")
-        return HttpResponseRedirect(request.META["HTTP_REFERER"])
-
-    return render(request, "checkout/payment_selection.html", {})
-
-
 ####
-# PayPay
+# Thanh toán bằng PayPal
 ####
-from paypalcheckoutsdk.orders import OrdersGetRequest
-from .paypal import PayPalClient
 
 
 @login_required

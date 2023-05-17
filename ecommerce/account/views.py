@@ -54,17 +54,7 @@ def edit_details(request):
     return render(request, "account/dashboard/edit_details.html", {"user_form": user_form})
 
 
-@login_required
-def delete_user(request):
-    user = Customer.objects.get(user_name=request.user)
-    user.is_active = False
-    user.save()
-    logout(request)
-    return redirect("account:delete_confirmation")
-
-
 def account_register(request):
-
     if request.user.is_authenticated:
         return redirect("account:dashboard")
 
@@ -108,8 +98,6 @@ def account_activate(request, uidb64, token):
     else:
         return render(request, "account/registration/activation_invalid.html")
 
-
-# Addresses
 
 @login_required
 def view_address(request):

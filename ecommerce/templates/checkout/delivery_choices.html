@@ -87,7 +87,7 @@
             type: "POST",
             url: '{% url "checkout:basket_update_delivery" %}',
             data: {
-                deliveryoption: $(this).val(),
+                delivery_id: $(this).val(),
                 csrfmiddlewaretoken: "{{csrf_token}}",
                 action: "post",
             },

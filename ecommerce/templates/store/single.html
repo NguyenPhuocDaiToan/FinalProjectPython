@@ -390,16 +390,18 @@
                 }
             });
         })
-
-            // Change quantity
-    $(document).on("click", ".change-quantity", function (e) {
-        e.preventDefault();
-        let id = $(this).data("index");
-        let type = $(this).data("type");
-        let input = $('#quantity-product');
-        let quantity = type === 'add' ? +input.val() + 1 : +input.val() - 1;
-        quantity === 0 ? input.val(1) : input.val(quantity);
-    });
+        // Change quantity
+        $(document).on("click", ".change-quantity", function (e) {
+            e.preventDefault();
+            // lấy id sản phẩm
+            let id = $(this).data("index");
+            // type = add hoặc sub
+            let type = $(this).data("type");
+            // lấy input để lấy số lượng
+            let input = $('#quantity-product');
+            let quantity = type === 'add' ? +input.val() + 1 : +input.val() - 1;
+            quantity === 0 ? input.val(1) : input.val(quantity);
+        });
     </script>
 
 </div>
