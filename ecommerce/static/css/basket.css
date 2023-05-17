@@ -1,0 +1,153 @@
+
+.basket-wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.basket-wrapper .basket-item {
+    margin-bottom: 20px;
+}
+.basket-wrapper .basket-item .basket-item-image {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-right: 20px;
+}
+.basket-wrapper .basket-item .basket-item-image img {
+    width: 100%;
+    height: 100%;
+}
+.basket-wrapper .basket-item .basket-item-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.basket-wrapper .basket-item .basket-item-price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.basket-wrapper .basket-item .basket-item-quantity {
+    margin-bottom: 10px;
+}
+.basket-wrapper .basket-item .basket-item-quantity input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.basket-wrapper .basket-item .basket-item-delete {
+    margin-bottom: 10px;
+}
+.basket-wrapper .basket-item .basket-item-delete input {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.basket-wrapper .basket-item .basket-item-total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.basket-wrapper .basket-item .basket-item-total input {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.basket-wrapper .basket-total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.basket-wrapper .basket-total input {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.basket-wrapper .basket-checkout {
+    margin-bottom: 10px;
+}
+.basket-wrapper .basket-checkout input {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.order-baskets {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.order-baskets .order-basket {
+    margin-bottom: 20px;
+}
+.order-baskets .order-basket .order-basket-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.order-baskets .order-basket .order-basket-price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.order-baskets .order-basket .order-basket-quantity {
+    margin-bottom: 10px;
+}
+.order-baskets .order-basket .order-basket-quantity input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.order-baskets .order-basket .order-basket-delete {
+    margin-bottom: 10px;
+}
+.order-baskets .order-basket .order-basket-delete input {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.order-baskets .order-basket .order-basket-total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.order-baskets .order-basket .order-basket-total input {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.order-baskets .order-total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.order-baskets .order-total input {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.order-baskets .order-checkout {
+    margin-bottom: 10px;
+}
+.order-baskets .order-checkout input {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
