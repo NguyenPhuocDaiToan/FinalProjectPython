@@ -111,7 +111,6 @@ def account_activate(request, uidb64, token):
 
 # Addresses
 
-
 @login_required
 def view_address(request):
     addresses = Address.objects.filter(customer=request.user)
