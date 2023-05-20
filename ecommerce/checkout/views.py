@@ -23,11 +23,12 @@ def basket_update_delivery(request):
     basket = Basket(request)
     if request.POST.get("action") == "post":
         delivery_id = int(request.POST.get("delivery_id"))
+        # Lấy phương thức vận chuyển theo id
         delivery = DeliveryOptions.objects.get(id=delivery_id)
         updated_total_price = basket.basket_update_delivery(delivery.delivery_price)
 
         session = request.session
-        # nếu không tồn tại delivery thì khởi tạo, còn tồn tại thì update
+        # nếu không tồn tại delivery thì khởi tạo, còn tồn tại thì update trong session
         if "delivery" not in request.session:
             session["delivery"] = {
                 "delivery_id": delivery.id,
@@ -50,6 +51,7 @@ def delivery_address(request):
 
     addresses = Address.objects.filter(customer=request.user).order_by("-default")
 
+    # nếu không tồn tại địa chỉ thì tạo mới, ngược lại thì update trong session
     if "address" not in request.session:
         session["address"] = {"address_id": str(addresses[0].id)}
     else:

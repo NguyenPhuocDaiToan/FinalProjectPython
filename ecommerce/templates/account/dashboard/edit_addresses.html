@@ -3,8 +3,13 @@
 
 {% block sub_content %}
 <div class="col-6 mx-auto">
-    <h1 class="h3">Thêm/Sửa địa chỉ</h1>
-    <div>Thêm địa chỉ vận chuyển mới</div>
+    {% if is_add %}
+        <h1 class="h3">Thêm địa chỉ mới</h1>
+        <div>Thêm địa chỉ vận chuyển mới</div>
+    {% else %}
+        <h1 class="h3">Sửa địa chỉ</h1>
+        <div>Sửa địa chỉ vận chuyển</div>
+    {% endif %}
     <hr/>
     <form name="address_form" class="account-form" method="post" enctype="multipart/form-data">
         {% if form.errors %}
@@ -27,7 +32,11 @@
         {{ form.postcode }}
         <button class="btn btn-primary btn-block py-2 mb-4 mt-4 fw-bold w-100" type="button" value="Submit"
                 onclick="submitForm()">
-            Thêm địa chỉ
+            {% if is_add %}
+                Thêm địa chỉ
+            {% else %}
+                Cập nhật
+            {% endif %}
         </button>
     </form>
 

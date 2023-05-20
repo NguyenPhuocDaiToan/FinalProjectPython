@@ -59,8 +59,7 @@ class Basket:
         newPrice = 0.00
         # Kiểm tra nếu session có delivery thì lấy giá tiền vận chuyển
         if "delivery" in self.session:
-            print("purchase")
-            newPrice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+            newPrice = DeliveryOptions.objects.get(id=self.session["delivery"]["delivery_id"]).delivery_price
 
         return newPrice
 
@@ -69,7 +68,7 @@ class Basket:
         subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
 
         if "delivery" in self.session:
-            newPrice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+            newPrice = DeliveryOptions.objects.get(id=self.session["delivery"]["delivery_id"]).delivery_price
 
         total = subtotal + Decimal(newPrice)
         return total

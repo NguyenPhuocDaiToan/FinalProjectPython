@@ -40,7 +40,7 @@ def product_detail(request, slug):
     products_same_brand = Product.objects.prefetch_related('product_image').filter(brand=product.brand)[:10]
     products_similar = Product.objects.prefetch_related('product_image').filter(product_type=product.product_type)[:10]
 
-    return render(request, "store/single.html", {
+    return render(request, "store/detail.html", {
         "product": product,
         "descriptions": descriptions,
         "products_same_brand": products_same_brand,

@@ -116,7 +116,7 @@ def add_address(request):
             return HttpResponseRedirect(reverse("account:addresses"))
     else:
         address_form = UserAddressForm()
-    return render(request, "account/dashboard/edit_addresses.html", {"form": address_form})
+    return render(request, "account/dashboard/edit_addresses.html", {"form": address_form, "is_add": True})
 
 
 @login_required
@@ -130,7 +130,7 @@ def edit_address(request, id):
     else:
         address = Address.objects.get(pk=id, customer=request.user)
         address_form = UserAddressForm(instance=address)
-    return render(request, "account/dashboard/edit_addresses.html", {"form": address_form})
+    return render(request, "account/dashboard/edit_addresses.html", {"form": address_form, "is_add": False})
 
 
 @login_required

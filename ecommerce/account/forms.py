@@ -44,13 +44,11 @@ class UserLoginForm(AuthenticationForm):
 
 
 class RegistrationForm(forms.ModelForm):
-    name = forms.CharField(
-        label='Username', min_length=4, max_length=50, help_text='bắt buộc')
-    email = forms.EmailField(max_length=100, help_text='bắt buộc', error_messages={
-        'required': 'Bạn cần nhập email để đăng ký'})
+    name = forms.CharField(label='Username', min_length=4, max_length=50, help_text='bắt buộc')
+    email = forms.EmailField(max_length=100, help_text='bắt buộc',
+                             error_messages={'required': 'Bạn cần nhập email để đăng ký'})
     password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label='Xác nhận mật khẩu', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Xác nhận mật khẩu', widget=forms.PasswordInput)
 
     class Meta:
         model = Customer
@@ -96,8 +94,7 @@ class PwdResetForm(PasswordResetForm):
         email = self.cleaned_data['email']
         u = Customer.objects.filter(email=email)
         if not u:
-            raise forms.ValidationError(
-                'Rất tiếc, chúng tôi không thể tìm thấy địa chỉ email đó')
+            raise forms.ValidationError('Rất tiếc, chúng tôi không thể tìm thấy địa chỉ email đó')
         return email
 
 
@@ -112,13 +109,18 @@ class PwdResetConfirmForm(SetPasswordForm):
 
 class UserEditForm(forms.ModelForm):
     email = forms.EmailField(
-        label='Email (không thể chỉnh sửa)', max_length=200, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'email', 'id': 'form-email', 'readonly': 'readonly'}))
+        label='Email (không thể chỉnh sửa)', max_length=200,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'email', 'id': 'form-email', 'readonly': 'readonly'}
+        )
+    )
 
     name = forms.CharField(
-        label='Tên người dùng', min_length=4, max_length=50, widget=forms.TextInput(
-            attrs={'class': 'form-control mb-3', 'placeholder': 'Name', 'id': 'form-firstname'}))
-
+        label='Tên người dùng', min_length=4, max_length=50,
+        widget=forms.TextInput(
+            attrs={'class': 'form-control mb-3', 'placeholder': 'Name', 'id': 'form-firstname'}
+        )
+    )
 
     class Meta:
         model = Customer
